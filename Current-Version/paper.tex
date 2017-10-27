@@ -1,0 +1,2741 @@
+%\documentclass[final]{beatcs}
+\documentclass[a4paper]{article}
+%\documentclass[a4paper,UKenglish]{lipics}
+
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+%\usepackage{epigraph}
+\usepackage{url}
+\usepackage{tikz}
+%\usepackage{graphics}
+\usepackage{color} 
+%\usepackage{fullpage}
+\usepackage{graphics}
+\usepackage{enumerate}
+\usepackage{microtype}
+\usepackage{subcaption}
+\usepackage{authblk}
+\usepackage{a4wide}
+
+\usepackage{thmtools,thm-restate}
+
+%\usepackage[pdftex]{graphicx}
+%\ifx\pdftexversion\undefined
+%\usepackage[dvips]{graphicx}%\else
+%  \usepackage[pdftex]{graphicx}
+%  \DeclareGraphicsRule{*}{mps}{*}{}
+%\fi
+
+\usepackage[boxed, ruled,noend,linesnumbered]{algorithm2e}
+
+\usepackage{wrapfig}
+\usepackage{cite}
+
+%\usepackage[bottom=1in,top=1in,left=1in,right=1in]{geometry}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%=
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%pour avoir plus de place
+% \advance \topmargin by -\headheight
+% \advance \topmargin by -\headsep
+%\textheight 8.9in
+% \oddsidemargin 0pt
+% \evensidemargin \oddsidemargin
+% \marginparwidth 0.5in
+%\textwidth 6.5in 
+% \setlength{\baselineskip}{13.2pt} % standard value is 13.75pt
+\def\algofont{\footnotesize} %fonte pour les algos
+
+
+%fin de pour avoir plus de place
+%du coup il faut commenter la suite
+%\textwidth 130mm 
+%\textheight 215mm
+%jusqu'ici
+%\renewcommand{\baselinestretch}{1.5}
+
+
+%Controlling floats
+%\renewcommand{\textfraction}{0.07}
+%\renewcommand{\floatpagefraction}{0.9}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{theorem}{Theorem}
+% \newtheorem{acknowledgement}[theorem]{Acknowledgement}
+% \newtheorem{algorithm}[theorem]{Algorithm}
+% \newtheorem{axiom}[theorem]{Axiom}
+% \newtheorem{case}[theorem]{Case}
+%\newtheorem{claim}[theorem]{Claim}
+%\newtheorem{fact}[theorem]{Fact}
+% \newtheorem{conclusion}[theorem]{Conclusion}
+% \newtheorem{condition}[theorem]{Condition}
+% \newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+% \newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}{Definition}
+% \newtheorem{example}[theorem]{Example}
+% \newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+% \newtheorem{notation}[theorem]{Notation}
+% \newtheorem{problem}[theorem]{Problem}
+%\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{property}[theorem]{Property}
+% \newtheorem{remark}[theorem]{Remark}
+% \newtheorem{solution}[theorem]{Solution}
+% \newtheorem{summary}[theorem]{Summary}
+%\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\hfill $\Box$} %\rule{0.5em}{0.5em}\\}
+%\newenvironment{proofsketch}[1][Proof sketch]{\noindent\textbf{#1.} }{\hfill $\Box$\\[2mm]}
+%\rule{0.5em}{0.5em}\\}
+\def\lf{\tiny}
+%\def\rrnnll{\setcounter{linenumber}{0}}
+%\def\nnll{\refstepcounter{linenumber}\lf\thelinenumber}
+
+%\newcommand{\comment}[1]{\hspace{5mm}\{ \it #1~\}}
+
+\newcommand{\myparagraph}[1]{\vspace{6pt}\noindent \textbf{#1}}
+
+%\newcounter{linenumber}
+\newenvironment{algorithmfig}{\hrule\vskip 3mm}{ \vskip 3mm \hrule }
+
+
+\def\P{\ensuremath{\mathcal{P}}}
+\def\DP{\ensuremath{\Diamond\mathcal{P}}}
+\def\DS{\ensuremath{\Diamond\mathcal{S}}}
+%\def\T{\ensuremath{\mathcal{T}}}
+\def\Time{\mathbb{T}}
+\def\S{\ensuremath{\mathcal{S}}}
+\def\D{\ensuremath{\mathcal{D}}}
+\def\W{\ensuremath{\mathcal{W}}}
+\def\A{\ensuremath{\mathcal{A}}}
+\def\B{\ensuremath{\mathcal{B}}}
+\def\F{\ensuremath{\mathcal{F}}}
+\def\R{\ensuremath{\mathcal{R}}}
+\def\N{\ensuremath{\mathcal{N}}}
+\def\I{\ensuremath{\mathcal{I}}}
+\def\O{\ensuremath{\mathcal{O}}}
+\def\Q{\ensuremath{\mathcal{Q}}}
+\def\K{\ensuremath{\mathcal{K}}}
+\def\L{\ensuremath{\mathcal{L}}}
+\def\M{\ensuremath{\mathcal{M}}}
+\def\V{\ensuremath{\mathcal{V}}}
+\def\E{\ensuremath{\mathcal{E}}}
+\def\C{\ensuremath{\mathcal{C}}}
+\def\T{\ensuremath{\mathcal{T}}}
+\def\X{\ensuremath{\mathcal{X}}}
+\def\Y{\ensuremath{\mathcal{Y}}}
+
+\def\SC{\ensuremath{\mathcal{SC}}}
+
+
+\def\Nat{\ensuremath{\mathbb{N}}}
+\def\Om{\ensuremath{\Omega}}
+\def\ve{\varepsilon}
+\def\fd{failure detector}
+\def\cfd{\ensuremath{?\P+\DS}}
+\def\afd{timeless}
+\def\env{\ensuremath{\mathcal{E}}}
+%\def\faulty{unreliable}
+\def\bounded{one-shot}
+\def\cons{\textit{cons}}
+\def\val{\textit{val}}
+\def\code{\textit{code}}
+
+%\def\fair{\textit{steady}}
+%\def\Fair{\textit{Steady}}
+\def\fair{\textit{fair}}
+\def\Fair{\textit{Fair}}
+
+\def\HSS{\mathit{csize}}
+\def\argmin{\mathit{argmin}}
+\def\proper{\mathit{proper}}
+\def\content{\mathit{content}}
+\def\Level{\mathit{L}}
+\def\Blocked{\mathit{Blocked}}
+\def\Set{\mathit{Set}}
+
+\def\Awf{\A_{\textit{wf}}}
+\def\Atres{\A_{t\textit{-res}}}
+\newcommand{\Ares}[1]{\A_{#1\textit{-res}}}
+\def\Alg{\textit{Alg}}
+
+\newcommand{\correct}{\mathit{correct}}
+\newcommand{\faulty}{\mathit{faulty}}
+\newcommand{\infi}{\mathit{inf}}
+\newcommand{\live}{\mathit{live}}
+\newcommand{\true}{\mathit{true}}
+\newcommand{\false}{\mathit{false}}
+\newcommand{\stable}{\mathit{Stable}}
+\newcommand{\setcon}{\mathit{setcon}}
+\newcommand{\remove}[1]{}
+%\newtheorem{observation}[theorem]{Observation}
+
+\def\s {\mathbf{s}}
+\def\t {\mathbf{t}}
+\def\f{\mathbf{f}}
+\def\Chr{\operatorname{Chr}}
+\def\B {\mathcal{B}}
+\def\U {\mathcal{U}}
+\def\E {\mathcal{E}}
+\def\F{\mathcal{F}}
+\def\P{\mathcal{P}}
+\def\WF{\mathit{WF}}
+\def\Cons{\operatorname{Cons}}
+\def\Res{\mathit{Res}}
+\def\OF{\mathit{OF}}
+\def\O {\mathcal{O}}
+\def\I {\mathcal{I}}
+\def\bCons{\overline{\Cons}}
+\def\Bary{\operatorname{Bary}}
+\def\ipart{\infty\text{-}\mathit{part}}
+\def\minpart{\mathit{min}\text{-}\mathit{part}}
+\def\aff{\operatorname{aff}}
+\def\slow{\mathit{slow}}
+\def\wf{\operatorname{wf}}
+\def\id{\operatorname{id}}
+\def\cons{\operatorname{cons}}
+\def\ord{\operatorname{ord}}
+\def\V{\mathcal{V}}
+\def\si {\operatorname{si}}
+\def\sy {\operatorname{s}}
+\def\nat{\operatorname{nat}}
+\def\conc{\operatorname{conc}}
+\def\tL{\tilde{L}}
+\def\of{\operatorname{of}}
+\def\Skel {\operatorname{Skel}}
+\def\x{\mathbf{x}}
+\def\MEM {\mathit{MEM \!}}
+\def\adv{\operatorname{adv}}
+\def\Car{\mathit{carrier}}
+
+\def\IStwo{\ensuremath{{\texttt{IS}^2}}}
+\def\ISone{\ensuremath{{\texttt{IS}^1}}}
+
+%\def\IStwo{\ensuremath{\Chr^2}}
+%\def\ISone{\ensuremath{\Chr^1}}
+
+\def\IS{\textit{IS}}
+
+\def\Cont{\textit{Cont}}
+
+
+\renewcommand\th{^{\text{th}}}
+%\newcommand\st{^{\text{st}}}
+
+
+\def\Nomega{\ensuremath{\neg\Omega}}
+\def\Vomega{\ensuremath{\overrightarrow{\Omega}}}
+
+%\newcommand{\id}[1]{\mbox{\textit{#1}}}% for identifiers in code
+%\newcommand{\res}[1]{\mbox{\textbf{#1}}}% reserved words
+
+%% Text to skip
+\newcommand{\ignore}[1]{}
+
+%% Adding notes (in bold) 
+\newcommand{\pknote}[1]{\textbf{PK: #1}}
+\newcommand{\trnote}[1]{\textbf{TR: #1}}
+\newcommand{\yhnote}[1]{\textbf{YH: #1}}
+\newcommand{\egnote}[1]{\textbf{EG: #1}}
+
+%% ``set consensus power'' or hitting-set size
+%\newcommand{\power}[1]{|\mathcal{HS}(\A|_{#1})|}
+\newcommand{\power}[1]{\alpha(#1)}
+
+%\pagestyle{plain}
+
+\begin{document}
+
+
+%\title{On Compact Representations of Non-Compact Models}
+%\title{Compact Topology of Shared-Memory Adversaries}
+\title{Asynchronous Computability Theorem for Fair Adversaries}
+%\titlerunning{Compact Topology of Shared-Memory Adversaries}
+running{Compact Topology of Shared-Memory Adversaries}
+
+\author[1]{Petr Kuznetsov}
+\author[1]{Thibault Rieutord}
+\author[3]{Yuan He}
+\affil[1]{LTCI, T\'el\'ecom ParisTech, Universit\'e Paris-Saclay, Paris, France\\
+  \texttt{\{petr.kuznetsov,thibault.rieutord\}@telecom-paristech.fr}}
+%\affil[2]{LTCI, T\'el\'ecom ParisTech, Universit\'e Paris-Saclay, Paris, France\\
+% \texttt{thibault.rieutord@telecom-paristech.fr}}
+\affil[2]{UCLA, Los Angeles, USA\\
+  \texttt{yuan.he@cs.ucla.edu}}
+
+%\authorrunning{P. Kuznetsov, T. Rieutord and Y. He}
+
+%\Copyright{Petr Kuznetsov, Thibault Rieutord and Yuan He}
+
+%\subjclass{C.2.4 - Distributed Systems, F.1.1 - Models of Computation.}
+
+%\keywords{Adversarial models, Affine tasks, Topological characterization.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\date{}
+\maketitle
+\begin{abstract}
+The paper proposes a simple topological characterization of
+a large class of \emph{adversarial} distributed-computing models via  
+\emph{affine tasks}: sub-complexes of the second
+iteration of the standard chromatic subdivision.
+We show that the task computability of a model in the class is precisely captured by
+iterations of the corresponding affine task. 
+%An important advantage of this characterization is that,
+While an adversary is in general defined as a \emph{non-compact} set of 
+infinite runs, its affine task  is just a finite subset of runs of the
+$2$-round iterated immediate snapshot model.
+%
+Our results generalize and improve all previously derived
+topological characterizations of distributed-computing models. 
+%
+%Our results are derived for abstract models represented via recently
+%introduced \emph{agreement functions} and apply, besides
+%superset-closed adversaries, to symmetric progress conditions of
+%Taubenfeld.
+%
+%We show that the class of affine task we propose has an element
+%equivalent, regarding task solvability, to any adversarial model
+%but also to any system which has access to any collection of set-consensus
+%objects.
+%Our results thus imply the first \emph{compact} combinatorial representation of
+%generic (non-compact) adversarial models, as well as large class of deterministic
+%objects captured by collection of set-consensus objects.
+\end{abstract}
+
+\begin{center}
+ {\bf Regular and student paper: T. Rieutord and Y. He are
+   full-time students}
+ \end{center}
+
+
+
+%\thispagestyle{empty}
+%\newpage
+
+%-\setcounter{page}{1}
+
+\section{Introduction}
+
+\myparagraph{Compact topology of wait-freedom.}
+%Devising algorithms that maintain consistency in the
+%presence of failures and in the absence of synchrony assumptions is a
+%major challenge in distributed computing. 
+%
+Distributed computing is a jungle of models, parameterized by 
+types of failures, synchrony assumptions, and employed communication
+primitives.
+Determining relative computability power of these models (``is model
+$A$ more powerful than model $B$'') is an intriguing and important
+problem.
+
+In this paper, we deal with a large class of \emph{shared-memory} models in which a set of
+\emph{crash-prone} \emph{asynchronous} processes communicate
+via invoking operations on a
+collection of shared objects. By default, we assume that the shared objects include 
+atomic read-write registers.  
+
+
+The \emph{wait-free} model of computation~\cite{Her91} 
+makes no assumptions about the number of failures that can occur, 
+so no correct process can be prevented from making progress.
+%
+Herlihy and Shavit proposed an elegant 
+characterization of wait-free task computability through the
+existence of a specific continuous map from geometrical
+structures describing inputs and outputs of a given
+task~\cite{HS99}.
+%
+A task $T$ has a wait-free solution using read-write registers  
+%in the \emph{read-write} shared-memory model
+if and only if there exists a simplicial, chromatic map from a
+\emph{subdivision}  of the \emph{input} simplicial complex to the \emph{output} simplicial complex,
+satisfying the specification of $T$.
+%
+In particular, we can choose this subdivision to be the iterated
+\emph{standard chromatic} subdivision %~\cite{HKR14}
+(Figure~\ref{Fig:scs}(a)).
+The subdivision precisely captures the output complex of the
+\emph{immediate snapshot} (IS) task~\cite{BG97}.
+By solving the IS task iteratively, proposing the view obtained in the
+current iteration as the input value of the next one, we obtain the
+\emph{iterated} immediate snapshot (IIS) model.
+
+%\begin{wrapfigure}{r}{0.45\textwidth}
+%\center
+%\includegraphics[scale=0.40]{Figures/scs_other.pdf}
+%\caption{\label{Fig:scs} \small The standard chromatic subdivision of
+%  $\s$ in dimension $2$, equivalent to the output complex of the IS task.}
+%\end{wrapfigure}
+
+\begin{figure}
+\captionsetup[subfigure]{justification=centering}
+  \begin{minipage}[b]{.49\linewidth}
+    \centering
+\includegraphics[scale=0.45]{Figures/scs_other.pdf}
+   \subcaption{\footnotesize{$\Chr^1(\s)$, equivalent to the output complex of the IS task.}}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{.49\linewidth}
+    \begin{center}
+\includegraphics[scale=0.5]{Figures/1-res.pdf}
+     \subcaption{\footnotesize{$T_1$, the task corresponding to $1$-resilience.}}
+    \end{center}
+  \end{minipage}
+  \caption{\small{Examples of subsets of iterated standard chromatic subdivisions of
+  $\s$ in dimension $2$.}}
+  \label{Fig:scs}
+\end{figure}
+
+
+
+Thus, the topological characterization of Herlihy
+and Shavit~\cite{HS99} can be interpreted as:
+the set of wait-free solvable task is precisely the set of tasks
+solvable in the IIS model. 
+The ability of (iteratively) solving the IS task allows us
+to solve any task in the wait-free model.
+Hence, from the task computability perspective, the IS task is a finite (or, as we
+explain below,  \emph{compact}) representation of the
+wait-free model.  
+
+\myparagraph{Adversaries.}
+%
+Given that many fundamental tasks are not solvable in the wait-free
+way~\cite{BG93b,HS99,SZ00}, more general models were considered.  
+The prominent \emph{adversarial} failure model~\cite{DFGT11} 
+is defined through a collection $\A$ of process subsets, called \emph{live sets}, and
+requires that, in every run of the corresponding \emph{adversarial $\A$-model}, the set of
+processes taking infinitely many steps must be a live set.
+
+%[[PK rather to the related work? 
+\remove{
+The underlying structure of the live sets of a given adversary $\A$ 
+determines its power in solving \emph{colorless} distributed
+tasks\footnote{Intuitively, colorless tasks %~\cite{BG93b,BGLR01}
+  can be defined without the notion of process identifiers}.
+%
+The ability of $\A$ to solve colorless tasks is precisely
+captured by its \emph{set consensus
+  power}~\cite{DFGT11}\footnote{Although the notion is called
+  disagreement power in~\cite{DFGT11}, we chose a more informative
+  name proposed in~\cite{GK10}.}.
+The set consensus power of $\A$, that can be defined through the formula
+proposed in~\cite{GK10}, determines the smallest $k$ such that $k$-set consensus can be solved in
+assuming $\A$.
+%  
+Adversaries having the same set consensus power agree on the set
+of colorless tasks they solve.
+
+Consider the special case of \emph{superset-closed} adversaries~\cite{Kuz12},
+that, intuitively, do not expect any set of processes to
+fail and are, thus, closed under the superset operation.
+The set consensus power of a superset-closed adversary is its minimum \emph{core size}:
+the size of a smallest set of processes that intersects with
+every live set.
+%
+Herlihy and Rajsbaum~\cite{HR12} related the set consensus power of a
+superset-closed adversary with the connectivity properties of the
+corresponding topological structure. 
+They show that the protocol complex of a superset-closed adversary with 
+\emph{minimal core size} $c$ is $(c-2)$-connected.
+This result, obtained via an iterative application of the Nerve lemma, gives
+a combinatorial characterization of superset-closed adversaries, which
+is weaker than the characterization of wait-freedom through
+the immediate snapshot task.
+%
+It only applies to colorless tasks, and it does not allow us to express the
+adversary in a \emph{compact} way via a specific task whose iterations
+give an equivalent model.  
+}
+
+%\myparagraph{Compact topology of adversaries.}
+%
+For example, the $t$-resilient $n$-process model is defined via
+an
+%superset-closed
+adversary $\A_t$ that consists
+of all live sets of size $n-t$ or more. 
+%
+%Its set \emph{consensus power} is $t+1$.
+%[[ 
+%: any set of size $t+1$ processes intersects
+%with every live set.
+%
+Notice that, assuming the conventional ``longest-prefix''
+metric~\cite{AS85}, the model is \emph{non-compact}.
+Indeed, all finite prefixes of an infinite run can be in the model,
+even though the run (the infinite limit of the sequence of its
+ever-extending finite prefixes) is not.
+Consider, for example, an infinite ``solo'' run in which exactly one
+process takes steps in a $1$-resilient system of three processes.    
+
+%\begin{wrapfigure}{r}{0.45\textwidth}
+%\center
+%\includegraphics[scale=0.55]{Figures/1-res.pdf}
+%\caption{\label{Fig:tres} \small Graphical representation of $T_1$ in dimension $2$.}
+%\end{wrapfigure}
+
+Saraph et al.~\cite{SHG16} recently proposed a direct characterization
+of $t$-resilient %(general)
+task computability via a specific task $T_t$, defined 
+as a restriction of the \emph{double} immediate snapshot
+task: the output complex of the task is a subcomplex consisting of
+\emph{all} simplices of the second degree of the standard chromatic
+subdivision of the task's input complex, except the simplices 
+adjacent to the $(n-t-1)$-skeleton of the input
+complex (Figure~\ref{Fig:scs}(b)).
+
+Solving a %\emph{any} (not necessarily colorless)
+task $T$ in the  $t$-resilient model is then equivalent to finding a map from
+iterations of $T_t$ (starting from the input complex of $T$) to the output complex of $T$.   
+%solving $T_t$: by iterating this
+%solution we get a model equivalent to $t$-resilience.   
+Therefore, $T_t$ is a compact representation of a (non-compact) model
+of  $t$-resilience. 
+
+
+\myparagraph{Compact topology of fair adversaries.}
+In this paper, we present a compact topological characterization
+of the large class of \emph{\fair} adversarial models~\cite{KR17}
+that subsumes the models of wait-freedom and $t$-resilience. 
+%of a
+%a large class of adversaries that includes superset-closed ones.
+%
+We show that a specific task
+$\R_{\A}$ captures the task computability of an adversary $\A$.  
+Informally, the task consists in solving chromatic simplex
+agreement~\cite{BG97,HS99} on a specific \emph{subcomplex} of the second
+iteration of the standard chromatic  subdivision.
+Such a tasks is called \emph{affine}~\cite{GKM14-podc,GHKR16}, as
+the geometrical representation of its output complex is
+a union of affine spaces (see, e.g., Figure~\ref{Fig:scs}(b)).  
+
+%We show that the affine task $\R_{\A}$ capturing the
+%$k$-set-consensus%
+%model consists of all simplices of  the second chromatic subdivision, 
+%in which at most~$k$ processes \emph{contend} with each other
+%(cf. examples of~$\R_1$ and~$\R_2$  for $3$ processes in 
+%Figure~\ref{fig:complexes}).
+
+%\myparagraph{Agreement functions and {\fair} adversaries.}
+%
+Our characterization is expressed in an abstract way via
+\emph{agreement functions}~\cite{KR17}.
+%
+For each set of \emph{participating} processes (i.e., processes that
+took at least one step in the
+computation), the agreement function determines the best level of set
+consensus that can be achieved if only these processes \emph{participate} in
+the computation.
+%
+The agreement function corresponding to any adversary can be efficiently computed for
+any adversary~\cite{GK10,KR17}.
+It turns out that agreement functions encode enough information to
+characterize the task computability of any {\fair}
+adversary~\cite{KR17}.
+%
+Informally, a {\fair} adversary does not allow a \emph{subset} of
+processes participating in a computation to achieve a better 
+set consensus than the whole set of participants.
+%
+%
+The class of {\fair} adversaries includes \emph{superset-closed}~\cite{Kuz12}
+and \emph{symmetric}~\cite{Tau10}.
+%
+In particular, the $t$-resilient adversary is both superset-closed and
+symmetric, and the \emph{$k$-obstruction free} adversary, recently
+characterized in a compact way~\cite{GHKR16}, is symmetric.  
+
+%[[PK too technical: to the preliminaries?
+\remove{
+Symmetric adversaries (or \emph{symmetric progress
+  conditions} introduced by Taubenfeld. 
+%
+A symmetric adversary does not depend on process identifiers: if
+$S\in\A$, then for every set of processes $S'$ such that $|S'|=|S|$,
+we have $S'\in\A$.
+%
+Thus, an $n$-process symmetric adversary can be defined
+as a set $L$ of ``levels'' in
+$\{1,\ldots,n\}$ so that a set of processes is a live set if and only
+if its size is in $L$.
+%
+For example, the \emph{$k$-obstruction free} adversary, recently
+characterized in an affine way in~\cite{GHKR16}, consists of all
+sets of  sizes from $1$ to $k$.
+}
+
+Our characterization can then be put as a generalization of the
+celebrated Asynchronous Computability Theorem (ACT) by Herlihy and Shavit~\cite{HS99}:
+\begin{quote}
+A task $T=(\I,\O,\Delta)$, where $\I$ is the input complex, $\O$ is an
+output complex, and $\Delta$ is a map from $\I$ to sub-complexes of
+$\O$, is solvable in a fair adversarial $\A$-model
+if and only if there exists a natural number $\ell$ and a simplicial map
+$\phi: \R_{\A}^{\ell}(\I) \rightarrow \O$ carried by $\Delta$
+(informally, respecting the task specification $\Delta$).
+\end{quote}
+
+This result generalizes all topological characterizations of
+distributed computing models~\cite{HS99,GKM14-podc,GHKR16,SHG16},
+as it applies to \emph{all} tasks (not only colorless)
+and \emph{all} fair adversaries (not only
+$t$-resilient and $k$-obstruction-free).
+Furthermore, our characterization is compact: we match (potentially complicated and non-compact)
+fair adversarial models with simple finite affine tasks, defined as 
+sub-complexes of the second-degree standard chromatic subdivisions.
+
+Given that there are only finitely many such affine tasks, we conclude
+that there can only be finitely many equivalence classes of fair
+adversarial models. We believe that the results can be extended to
+all ``practical'' restrictions of the wait-free model of computations, beyond fair
+adversaries, which may potentially result in a complete computability
+theory for distributed computing.    
+
+\myparagraph{Roadmap.} 
+%The rest of the paper is organized as follows. 
+Section~\ref{sec:model} gives model preliminaries and
+Section~\ref{sec:adv} recalls the definitions of adversaries,
+agreement functions, and the states the equivalence of
+task computability in a fair adversarial model and the corresponding
+$\alpha$-model.  
+%, briefly overviews the topological representation of iterated
+%shared-memory models, and recalls basic simulation techniques used to
+%derive our results. 
+%In Section~\ref{sec:adv}, we formally define the notion of an agreement
+%function and define agreement function of some known models of computation.  
+In Section~\ref{sec:def}, we present the definition of the affine task
+$\R_{\alpha}$ corresponding to an $\alpha$-model.
+In Section~\ref{sec:R}, we show that $\R_{\alpha}$ can be implemented
+in most $\alpha$-model. 
+In Section~\ref{sec:alpha}, we show that any task solvable in 
+the $\alpha$-model can be solved by iterating $\R_{\alpha}$.
+Section~\ref{sec:related} reviews related work and
+Section~\ref{sec:disc} concludes the paper.
+%
+Some proofs and missing details are delegated to the
+optional appendix.
+
+
+
+
+
+
+%======================
+\section{Preliminaries}
+\label{sec:model}
+%======================
+
+Let $\Pi$ be a system composed of $n$ asynchronous processes, 
+$p_1,\ldots,p_n$. We consider two models of communication: 
+(1)~\emph{atomic snapshots}~\cite{AADGMS93} and 
+(2)~\emph{iterated immediate snapshots}~\cite{BG97,HS99}.
+
+\myparagraph{Communication models.}
+%
+The atomic-snapshot (AS) memory is represented as a vector of 
+shared variables, where processes are associated to distinct 
+vector positions, and it exports two operations: \emph{update} and 
+\emph{snapshot}. An \emph{update} operation performed by $p_i$ 
+replaces the shared variable at position $i$ with a new value 
+and a \emph{snapshot} returns the current state of the vector. 
+%The model in which processes only have access to an AS memory is 
+%called the AS model.
+
+%\myparagraph{Iterated immediate snapshots.}
+%
+In the iterated immediate snapshot (IIS) model,
+processes proceed through a sequence of independent 
+memories~$M_1, M_2,\ldots$. Each memory~$M_r$ is accessed 
+by a process with a single \emph{immediate snapshot} 
+operation~\cite{BG93a}: the operation performed by~$p_i$ takes a
+value~$v_i$ and returns a set~$V_{ir}$ of values submitted by 
+the processes (w.l.o.g, we assume that the values of 
+different processes are distinct), so that the following 
+properties are satisfied: (self-inclusion)~$v_i \in V_{ir}$; 
+(containment)~$(V_{ir}\subseteq V_{jr}) \vee (V_{jr}\subseteq V_{ir})$; and 
+(immediacy)~$v_i \in V_{jr}$ $\Rightarrow$ $V_{ir}\subseteq V_{jr}$. 
+
+
+\myparagraph{Protocols and runs.}
+%
+A \emph{protocol} here is a deterministic  distributed automaton that, for each 
+local state of a process, stipulates which operation and which 
+state transition the process is allowed to perform. 
+%We assume here \emph{deterministic} protocols, and
+%where only 
+%one operation and state transition is allowed in each state. A 
+a \emph{run} of a protocol is defined as a possibly infinite 
+sequence of alternating states and operations.
+
+%
+In the IIS communication model, we assume that processes run the 
+\emph{full-information} protocol: the first value each process 
+writes is its \emph{initial state}. For each $r>1$, the outcome of 
+the immediate snapshot operation on memory $M_{r-1}$ is 
+submitted as the input value for the immediate snapshot 
+operation on memory~$M_r$. After a certain number of such 
+(asynchronous) rounds, a process may gather enough information 
+to produce an irrevocable \emph{output} value.
+%, i.e., to produce an irrevocable non-$\bot$ 
+%output value. A \emph{run} of the IIS communication model is 
+%thus a sequence~$V_{ir}$,~$i\in\Nat_n$ and~$r\in\Nat$, 
+%determining the outcome of the immediate-snapshot operation for 
+%every process~$i$ and each iterated memory~$M_r$.
+
+\myparagraph{Failures and participation.}
+%
+In an infinite run of the AS model,
+%(or the defined below AS model in which $k$-set-consensus objects
+%can additionally be accessed),
+a process that takes only  finitely many steps
+%of the assigned  protocol in a given  run
+is called \emph{faulty}, otherwise it is called 
+\emph{correct}. We assume that in its first step, a process 
+writes its initial state in the shared memory using the \emph{update} operation. If a process 
+completed this first step in a given run it is said to be
+\emph{participating}, and the set of participating processes is called
+the \emph{participating set}.
+Note that in an infinite run, every correct process is participating.
+%Note that, since every 
+%process writes its initial state in its first step, the initial 
+%states of participating processes are eventually known to every 
+%process that takes sufficiently many steps.
+
+\remove{
+In contrast, the IIS model does not have the notion of a faulty 
+process. Instead, a process may appear 
+``slow''~\cite{RS12,Gaf98-iis,BGK14}, i.e., be late in accessing 
+iterated memories from some point on so that some ``faster'' 
+processes do not see them. 
+}
+
+\myparagraph{Tasks.}
+%
+In this paper, we focus on distributed \emph{tasks}~\cite{HS99}. 
+A process invokes a task with an \emph{input} value and the task 
+returns an \emph{output} value, so that the inputs and the outputs 
+across the processes, respect the task 
+specification.
+Formally, a \emph{task} is defined through a set~$\I$ of input 
+vectors (one input value for each process), a set~$\O$ of output 
+vectors (one output value for each process), and a total 
+relation~$\Delta:\I\mapsto 2^{\O}$ that associates each input 
+vector with a set of possible output vectors. An input~$\bot$ 
+denotes a \emph{non-participating} process and an output 
+value~$\bot$ denotes an \emph{undecided} process. 
+Check~\cite{HKR14} for more details on the definition.
+
+A protocol solves a task $T=(\I,\O,\Delta)$ in a model $M$, 
+if it ensures that in every infinite run of~$M$ in which 
+processes start with an input vector $I\in\I$, there is a finite
+prefix $R$ of the run where: (1)~decided values form a 
+vector $O\in\O$ such that $(I,O)\in\Delta$, and (2)~all 
+correct processes decide. 
+
+\remove{
+\myparagraph{$k$-set-consensus and $k$-concurrency models.}
+%
+A $k$-set-consensus object 
+can be accessed with a \emph{propose} operation
+that takes a \emph{proposed} value as an argument and returns a
+\emph{decided} value as a response, so that, in each run,  decided
+values constitute a subset of proposed values of size at most $k$.   
+For $k\in\{1,\ldots,n-1\}$, in the \emph{$k$-set-consensus model}, processes communicate via the
+AS memory and $k$-ste-consensus objects. 
+
+Let $R$ be a finite run of the AS model.
+A process $p_i$ is called \emph{active at the end of $R$} 
+if $p_i$ participates in $R$ but has not terminated by the end of $R$. 
+Let $\textit{active}(R)$ denote the set of all processes that 
+are active at the end of $R$.
+
+A run $R$ of the AS model is \emph{$k$-concurrent} ($k=1,\ldots,n$) if at most 
+$k$ processes are \emph{concurrently active} in $R$, i.e., 
+$\max\{|\textit{active}(R')|;\; R' \textrm{ prefix of } R\}\leq k$. 
+The \emph{$k$-concurrency} model is the set of $k$-concurrent 
+runs of the AS model.
+
+It is known that the $k$-concurrency model is \emph{equivalent} 
+to the $k$-set-consensus model~\cite{GG09}\footnote{In fact, 
+this paper contains a self-contained proof of this equivalence 
+result.}: any task that can be solved $k$-concurrently can also 
+be solved in the $k$-set-consensus model, and vice versa.
+}
+
+\myparagraph{Standard chromatic subdivision and IIS.}
+%
+We use the standard language of \emph{simplicial
+  complexes}~\cite{Spanier,HKR14} to give a combinatorial
+representation of the IIS model. See Appendix~\ref{app:topprimer} for
+missing details.
+A \emph{simplicial complex} is defined as a set of 
+\emph{vertices} and an inclusion-closed set of vertex subsets, 
+called \emph{simplices}. The dimension of a simplex is 
+the number of its vertices minus one. Any subset of these 
+vertices is called a \emph{face}. 
+
+%[[PK the wording is unclear, but the notions are standard  
+%A simplicial map is a map between simplicial complexes 
+%which maps faces of a simplex to faces of a simplex.
+%In particular, a vertex map induce a simplicial map.
+%]]
+
+A simplicial complex is \emph{pure} (of dimension $n$) if each of its simplices 
+is contained in a simplex of dimension $n$.
+A simplicial complex is \emph{chromatic} if it is equipped with 
+a \emph{coloring function}---a non-collapsing simplicial map $\chi$ from its vertices to 
+the {\em standard $(n-1)$-simplex}~$\s$ of $n$ vertices, in 
+one-to-one correspondence with $n$ {\em colors} $1,2, \dots, n$. 
+With some abuse of notation, processes may be referred to 
+by their identifiers and~$\chi$ used to obtain 
+the set of processes associated to a simplex.
+%
+%Refer to the extended version of this paper~\cite{GHKR16TR} or~\cite{HKR14} for more details on the 
+%formalism.
+
+The \emph{standard chromatic subdivision}~\cite{HS99} of $\s$, denoted
+$\Chr\s$ and depicted in Figure~\ref{Fig:scs}(a), is a complex where vertices of $\Chr\s$ are couples $(v, \sigma)$, where~$v$ is a 
+vertex of~$\s$ and~$\sigma$ is a face of~$\s$ containing~$v$, and
+simplices are sets of vertices
+$(v_1,\sigma_1)$,~$\ldots$,~$(v_m,\sigma_m)$  satisfying the
+properties of immediate snapshot. 
+%
+$\Chr\s$ is indeed a \emph{subdivision} of $\s$: in particular, 
+it is homeomorphic to $|\s|$, the geometric realization of $\s$~\cite{Koz12}.
+%
+If we \emph{iterate} this subdivision~$m$ times, each time 
+applying $\Chr$ to each of the simplices, we 
+obtain the~$m^{th}$ chromatic subdivision,~$\Chr^m C$.
+$\Chr^m \s$ precisely captures  the $m$-round 
+(full-information) IIS model, denoted IS$^m$~\cite{HS99}.
+
+The \emph{carrier} of simplex $\sigma\in\Chr^m\s$ relatively to $\Chr^{m'}\s$, 
+with $m'<m$, which we denote as~$\Car(\sigma,\Chr^{m'}\s)$ is 
+the smallest simplex $\sigma'\in\Chr^{m'}\s$ such that in the geometric 
+realization of $\sigma$, $|\sigma|$, is included in $|\sigma'|$. 
+Intuitively, for a vertex $v$ in $\Chr^m\s$, 
+$\Car(v,\Chr^m\s)$ is the set of all processes \emph{seen} by 
+the process~$\chi(v)$ in the corresponding run of IS$^m$.
+%possibly through the views of other processes: it 
+%See Appendix~\ref{app:topprimer} for more details.
+
+\remove{
+Each 
+run of~IS$^m$ corresponds to a simplex in~$\Chr^m \s$. Every 
+vertex~$v$ of~$\Chr^m \s$ is thus defined 
+as~$(p,\IS^1(p,\sigma),\ldots,\IS^m(p,\sigma))$, where 
+each~$\IS^i(p,\sigma)$ is interpreted as the set of processes 
+appearing in the~$i^{th}$ IS iteration obtained by~$p$ in the 
+corresponding~$\IS^m$ run. The \emph{carrier} of vertex~$v$ is 
+then defined as the set of all processes seen by~$p$ in this run, 
+possibly through the views of other processes: it is the 
+smallest face of~$\s$ that contains~$v$ in its geometric 
+realization. The carrier of a simplex is the maximal carrier 
+of its vertices (related by inclusion). 
+}
+
+
+\myparagraph{Simplex agreement and affine tasks.}
+%As we show in this paper, the class of fair adversaries can be captured by an iterated 
+%\emph{affine} task~\cite{GKM14-podc}.
+In a general simplex agreement task, every process is given, as an
+input, a vertex of its color in thr standard simplex $\s$, and is
+expected to output a vertex of $\C$ of its color, so that the outputs
+form a simplex of $\C$.   
+In the instances of simplex agreement considered in characterizations
+of wait-free task computability~\cite{BG97,HS99}, inputs were vertices
+of $\s$ and $\C$ was a chromatic subdivision of $\s$.
+
+Affine tasks can be seen as a generalization of simplex agreement
+tasks considered in~\cite{BG97,HS99}, where the output 
+complex is no longer a subdivision but a subset of some 
+iteration of the standard chromatic subdivision.
+Formally, let $L$ be a pure subcomplex of $\Chr^l\s$ for some~$l\in \mathbb{N}$.
+The affine task associated to $L$ is then defined as $(\s,L,\Delta)$, 
+where, for every face 
+$\t \subseteq \s$, $\Delta(\t) = L \cap \Chr^l \t$.
+Notice that $L \cap \Chr^l(\t)$ can be empty, in which case no
+participating process is required to output.
+
+With a slight abuse of 
+notations, we use $L$ to denote the affine task 
+associated to $L$. 
+By running~$m$ iterations of this task, we obtain $L^m$, a 
+subcomplex of $\Chr^{lm}\s$, corresponding to a subset of 
+$\IS^{~lm}$ runs (each iteration includes $l$ IS rounds). We 
+denote by $L^*$ the set of infinite runs of the IIS model where 
+every prefix restricted to a multiple of $l$ IS rounds 
+belongs to the subset of $\IS^{~lm}$ runs associated to $L^m$.
+
+\remove{
+\myparagraph{BGG-simulation.}
+%
+We employ a the \emph{BGG-simulation} simulation
+technique~\cite{KR17} that
+assembles algorithmic ideas presented in~\cite{BG93a,Gaf09-EBG,GG09,GG11-univ}. 
+%Let us now recall the main simulation
+%tool that is used in this paper, that will call the BGG-simulation
+%according to the name of the three main investigators of this
+%technique, namely Elizabeth Borowski, Eli Gafni and Rachid
+%Guerraoui.
+The technique allows a system of $n$ processes that communicate via
+read-write shared memory and $k$-set-consensus objects to
+\emph{simulate} a $k$-process system running an arbitrary read-write
+algorithm.
+%
+In particular, we can use this technique to run an extended BG-simulation~\cite{Gaf09-EBG} on top
+of these $k$ simulated processes, which gives a simulation of an
+arbitrary $k$-concurrent algorithm.
+An important feature of the simulation is that it adapts to the
+number of currently active simulated processes $a$: if it goes below
+$k$ (after some simulated processes complete their computations), the
+number of used simulators also becomes $a$.    
+We refer to~\cite{GHKR16} for a detailed description of this
+simulation algorithm.
+}
+\remove{
+
+\myparagraph{Defining models via agreement functions.}
+%
+\begin{definition}{[Agreement function]}
+The \emph{agreement function} of an (adversarial) model $\A$ is 
+a function $\alpha: 2^{\Pi} \to \{0,\ldots,n\}$, such that 
+for each $P\in 2^{\Pi}$, in the set of runs of $\A$ in which no process
+in $\Pi\setminus P$ participates,
+$\alpha(P)$-set consensus can be solved, 
+but $(\alpha(P)-1)$-set consensus cannot.
+%
+%%By convention, if $M$ contains no (infinite) runs with participating set
+%%$P$, then  $\alpha(P)=0$.
+%, e.g., there is no run in
+%$M$ with participating set $P$.
+\end{definition}
+
+\begin{definition}{[Solving a task $\alpha(P)$-active-resiliently]}
+Let $\alpha: 2^{\Pi} \to \{0,\ldots,n\}$ be the agreement function of a
+model $\A$.
+Let $P$ be any subset of $\Pi$. 
+An algorithm \emph{solves a task $T=(\I,\O,\Delta)$ in $\alpha(P)$-active-resiliently} if,
+assuming that $P$ is the participating set, it ensures that (1) in every run in which
+processes start with an input vector $I\in\I$, 
+all decided values form a vector $O\in\O$ such that $(I,O)\in\Delta$,
+ and (2) if the run is $(\alpha(P)-1)$-active-resilient, i.e., at most
+ $\alpha(P)-1$ participating processes are faulty. 
+\end{definition}
+
+We are going to use the following result concerning 
+}
+
+%======================
+%\section{Defining models through agreement functions}
+
+%\trnote{Previous version way too long for here, a section is probably too much also. Last, it may be convenient to make noticed that agreement function extended to the number of ``active'' processes, i.e., the number of processes participating to a particular agreement operation trivially capture collection of set-consensus objects...}
+
+\remove{
+\label{sec:agr}
+%======================
+
+%\myparagraph{Models.}
+%
+Generally, a \emph{model} is a set of runs. 
+In the AS case, we assume that a model allows every process to
+participate, i.e., for each $P\in2^{\Pi}$, the model includes a run in
+which $P$ is the participating set. 
+
+Consider a function $\alpha: 2^{\Pi} \to \{0,\ldots,n\}$. 
+We say that $\alpha$ is an agreement function of if each set of participating processes
+$P\in 2^{\Pi}$ can solve $\alpha(P)$-set agreement but cannot solve
+$(\alpha(P)-1)$-set agreement in this model.  
+By convention, $\alpha(P)=0$ implies that if $P$ is the participating
+set, then no process is obliged to decide.
+
+We say that $\alpha$ is \emph{monotonic} if for all $P$ and $P'$ in $2^{\Pi}$,
+$P\subseteq P'$ implies $\alpha(P)\leq\alpha(P')$. 
+
+
+
+\remove{
+\myparagraph{Active resilience.}  
+If in a given run, at most $k\in\Nat_n$ participating
+processes are faulty and at least one participating process is
+correct, we say that the run is \emph{$k$-active-resilient}.   
+The model of  \emph{$k$-active resilience} consists of all
+$k$-active-resilient runs. 
+
+It has been shown in~\cite{GG11-univ} that the model of $k$-active
+resilience is able to solve exactly the same set of tasks as the the
+model in which, in addition to atomic snapshots, processes are allowed
+to access $(k+1)$-set agreement objects, or the model of
+$k$-concurrency in which at most $k$ processes can be concurrently
+\emph{active}, i.e., after they take the first step and before they
+produce outputs. 
+
+\begin{lemma}%~\cite{GG11-univ}
+\label{lem:kconc}
+The agreement function of the model of $k$-active-resilience is
+$\alpha_{k,\textit{conc}}(P)= \min(|P|,k+1)$.
+\end{lemma}    
+}
+
+\myparagraph{Solving a task in a model.}
+%
+Consider a function $\alpha: 2^{\Pi} \to \{0,\ldots,n\}$.  
+An algorithm \emph{solves a task $T=(\I,\O,\Delta)$ in an
+  $\alpha$-model} if it ensures that (1) in every run in which
+processes start with an input vector $I\in\I$, 
+all decided values form a vector $O\in\O$ such that $(I,O)\in\Delta$,
+and (2) if the run is $(\alpha(P)-1)$-active-resilient, where $P$ is
+the participating set, then every correct process decides. 
+
+The definition immediately captures task solvability in the model of $k$-active
+resilience. 
+To convince ourselves that the definition applies to superset-closed
+adversaries, we need the following lemma.
+(Recall that solving a task in an adversarial model $\A$ is to ensure that
+in every $\A$-compliant run, every correct process decides, and
+decisions match inputs with respect to the task specification~\cite{GK10,HR10,Kuz12}.) 
+
+\begin{lemma}%~\cite{GG11-univ}
+\label{lem:adv:task}
+A task can be solved in a superset-closed adversarial model $\A$ if and
+only if can be solved in the $\alpha_{\A}$-model.
+\end{lemma}    
+%
+(Check Appendix~\ref{app:agr} for proofs.)
+}
+
+
+\section{Adversaries and agreement functions}
+\label{sec:adv}
+
+An \emph{adversary} $\A$ is a set of subsets of $\Pi$, called \emph{live sets}, $\A\subseteq 2^{\Pi}$.
+%
+%It is convenient to model patterns in which process failures can occur using the formalism of
+%\emph{adversaries}~\cite{DFGT11}. An adversary $\A$ is defined as a set of possible correct process subsets.
+%
+An AS run is \emph{$\A$-compliant} if the set of processes that are correct in that run
+belongs to $\A$. An adversarial $\A$-model is defined as the set of
+$\A$-compliant runs. 
+
+%\begin{definition}[Agreement function]~\cite{KR17}
+%  \label{def:agr}
+The \emph{agreement function}~\cite{KR17} of an adversarial model $\A$ is 
+a function $\alpha_\A: 2^{\Pi} \to \{0,\ldots,n\}$, such that 
+for each $P\in 2^{\Pi}$, in the set of runs of $\A$ in which no process
+in $\Pi\setminus P$ participates,
+$\alpha_\A(P)$-set consensus can be solved, 
+but $(\alpha_\A(P)-1)$-set consensus cannot.
+Note that by convention, if $\Pi\setminus P$ is not a
+valid participating set, as it does not include a live set,
+$\alpha_\A(P)$ is set to be equal to $0$.
+An \emph{$\alpha$-adaptive set consensus} is 
+an abstraction solving a set consensus protocol  
+such that at the time $k$ distinct output values are returned
+the participating set $P$ is such that $\alpha(P)\geq k$: 
+the abstraction takes a value as an input, 
+returns a proposed value as an output,  and ensures that at the
+time when $k$ distinct output has been returned at least
+$P$ processes, with $\alpha(P)\geq k$, are currently participating.   
+
+Let $\mathcal{AF}(\Pi)$ be the set of all agreement functions 
+corresponding to some adversarial model in $\Pi$. 
+For all $\alpha\in\mathcal{AF}(\Pi)$, we can define a natural model
+derived from the agreement function as follows:
+\begin{definition}[$\alpha$-model] 
+  The \emph{$\alpha$-model} is the set of
+  %\emph{$\alpha$-adaptive active-resilient} runs, i.e., all
+  runs in which, assuming that the participating set is $P$,
+  $\alpha(P)\geq 1$ and  at most $\alpha(P)-1$ participating processes are faulty.
+%Note that this implies that there is no run of the $\alpha$-model where the participating set $P$ is such that $\alpha(P)=0$.
+\end{definition}
+
+%
+%%By convention, if $M$ contains no (infinite) runs with participating set
+%%$P$, then  $\alpha(P)=0$.
+%, e.g., there is no run in
+%$M$ with participating set $P$.
+%\end{definition}
+
+An adversary is \emph{superset-closed}~\cite{Kuz12} if each superset of a set of an
+element of $\A$ is also an element of $\A$, i.e.,
+$\forall S\in \A$, $\forall S'\subseteq \Pi$, $S\subseteq S'$: $S'\in\A$. 
+Superset-closed adversaries provide an interesting non-uniform
+generalization of the classical $t$-resilience condition~\cite{HR10}:
+e.g., the \emph{$t$-resilient} adversary in a
+system of $n$ processes consists of all sets of $n-t$ or more processes.
+
+%
+
+%[[PK
+%Note that the agreement function of a generic adversary $\A$ is
+%defined $\setcon(A|P)$~\cite{GK11}. 
+%]]
+
+An adversary $\A$ is \emph{symmetric} if it does not depend on process
+identifiers and thus only on the size of live sets: 
+$\forall S \in \A$, $\forall S' \subseteq \Pi$, $|S'|=|S|\implies S'\in\A$.
+%Symmetric adversaries provides another interesting
+%generalization of the classical $t$-resilience condition and
+%$k$-obstruction-free progress condition~\cite{GG09} which was previously
+%formalized by Taubenfeld as its symmetric progress
+%conditions~\cite{Tau10}.
+
+%
+%\begin{theorem}%~\cite{HR10,GK10}
+%  \label{lem:sc-sym}
+For  $P\in 2^{\Pi}$, let $\A|_P$ denote the set of all elements of
+$\A$ that are subsets of $P$, and $\HSS(\A|_P)$ denote the size of the
+minimal hitting set in $\A|_P$, i.e., the minimal subset of $P$ that
+intersects with each element in $\A|_P$.  
+It is shown in~\cite{GK10} that the smallest $k$ such that $\A$ 
+can solve $k$-set consensus can be computed using a function $\setcon(\A)$,
+and thus that $\alpha_{\A}(P)=\setcon(\A|_P)$.
+For any superset-closed adversary~$\A$, we have
+$\alpha_{\A}(P) = \setcon(\A|_P) = \HSS(\A|_P)$.
+Moreover, for any symmetric adversary $\A$, we have
+$\alpha_{\A}(P)= \setcon(\A|_P) = |\{k\in\{1,\ldots,|P|\}: \exists S \in \A, |S|=k\}|$~\cite{GK10}.
+%\end{theorem}
+
+\myparagraph{Fair adversaries.}
+%
+Informally, an adversary is \emph{{\fair}}~\cite{KR17} if a subset $Q$ of
+participating processes $P$ cannot achieve better set consensus than the
+whole set of participants (unless $|Q|$ is smaller than~$\alpha_{\A}(P)$).
+The set consensus power of a subset $Q$ of the participating processes $P$
+corresponds to the set consensus power of the adversary 
+$\A|_{P,Q} = \{S\in\A:(S\subseteq P)\wedge(S\cap Q\neq\emptyset)\}.$
+%\begin{definition}\label{def:fair}[{\Fair} adversary]
+Therefore, an adversary $\A$ is {\fair} if and only if:
+\[\forall P \subseteq \Pi, \forall Q\subseteq P, \setcon(\A|_{P,Q})= min(|Q|,\setcon(\A|_P)){}.\]
+%\end{definition}
+
+Superset-closed and symmetric adversaries are fair~\cite{KR17}.
+%
+%We are going to use the following results concerning {\fair}
+%adversaries:
+It turns out that the task computability of a fair adversary is
+captured precisely by the $\alpha_\A$-model, i.e.,
+they both solve \emph{the same} set of tasks
+(we say that the models are \emph{equivalent}).
+
+\begin{theorem}~\cite{KR17}
+\label{th:adv:task}
+For any {\fair} adversary $\A$, a task is solvable in the adversarial
+$\A$-model if and only if it is solvable in the $\alpha_\A$-model. % are equivalent regarding task solvability.
+\end{theorem} 
+%
+
+Theorem~\ref{th:adv:task} was proved using the following result, which
+will be instrumental for us too:
+\begin{theorem}~\cite{KR17}
+\label{read/writeAndConsensus}
+For any task $T$, if $T$ is solvable in an $\alpha$-model, then $T$ is solvable in \emph{any} read-write shared 
+memory model which can solve the $\alpha$-adaptive set consensus task.
+\end{theorem}
+
+\remove{
+%
+\begin{theorem}~\cite{KR17}
+  \label{thm:AdaptiveAgreement}
+There exists an \emph{$\alpha$-adaptive}  set consensus algorithm
+that, in any run with a participating set $P$,
+satisfies the following properties: (\emph{Termination}) All \emph{correct} processes
+eventually decide;
+%
+(\emph{Agreement}) At most $\alpha(P)$ different values are decided,
+with $P$ the participation at the earliest time a process decided;
+%
+(\emph{Validity}) Each decided value has been proposed by some process.
+\end{theorem}
+}
+
+
+%===================================
+\section{Defining the affine task for an $\alpha$-model}
+\label{sec:def}
+%===================================
+
+Given an agreement function $\alpha\in\mathcal{AF}(\Pi)$, 
+we define the affine task $\R_\alpha$, a subcomplex of  
+the second degree of the standard chromatic subdivision $\Chr^2\s$. 
+In Sections~\ref{sec:R} and~\ref{sec:alpha}, we show that $\R_\alpha^*$, 
+i.e., the model of IIS runs obtained by iterating $\R_\alpha$, is equivalent to 
+the $\alpha$-model regarding task solvability.
+
+Two classes of affine tasks were recently defined.
+The class $\R_{t-res}$ was introduced in~\cite{SHG16}, with
+$\R_{t-res}^*$ equivalent to the $t$-resilient model. 
+Similarly, the class $\R_k$ was introduced in~\cite{GHKR16}, 
+with $\R_k^*$ equivalent to the $k$-concurrent model.
+%
+Interestingly, the models of $t$-resilience and $k$-concurrency correspond to 
+two ``well-behaved'' sub-classes of $\alpha$-models on opposite sides of the spectrum. 
+In a sense, an $\alpha$-model can be seen as 
+a combination of resilience and concurrency conditions. 
+Our definition of $\R_\alpha$
+thus combines the concurrency features, expressed through the notion of
+\emph{contention} simplices, and the resilience features, expressed
+through the notion of \emph{critical} simplices.
+
+
+\myparagraph{Contention simplices.}
+The carrier of a vertex $v$ in $\Chr\s$ determines the view
+process $\chi(v)$ obtains after completing the corresponding run of
+immediate snapshot (IS).
+%
+Thus, the \emph{order} in which the processes obtained their immediate snapshots 
+materializes in the resulting simplex in $\Chr\s$ through the inclusion-based order of 
+the carriers of their vertices. We can therefore define a partial order 
+on vertices of a simplex in $\Chr^2\s$, based on the
+\emph{views} the processes obtain in the first IS and the
+second IS.
+%
+For a vertex $v\in\Chr^2\s$, we define $\mathit{View}^1(v)=\Car(v',\s)$ 
+with $v'$ such that $(\chi(v)=\chi(v'))\wedge(v'\in \Car(v,\Chr \s))$,
+i.e., the first IS view that $\chi(v)$ had
+in the corresponding run.
+%
+Similarly, $\mathit{View}^2(v) = \Car(v,\Chr\s)$, i.e., the second IS view.
+
+Note that the more concurrency a run has,
+the less processes are ordered regularly.
+To capture the fact that a set of processes
+was executed concurrently in a run, we compare vertices'
+carriers.
+%
+We say that a simplex $\delta$ in $\Chr^2\s$ is a $2$-contention
+simplex, if any two vertices in $\delta$ have different ordered
+$\mathit{View}^1$ and $\mathit{View}^2$.
+Let ${\mathit{Cont}_2}$ denote the set of $2$-contention simplices in
+$\Chr^2 \s$ defined as follows\footnote{In our recent
+  paper~\cite{GHKR16} on the affine task for $k$-concurrency (a
+  special case of an $\alpha$-model), we introduced the notion of \emph{contention
+    sets}, capturing the sets of processes whose vertices in $\Chr^2\s$ have the same carrier
+  in $\s$.}:
+
+\begin{definition}{[$2$-Contention simplices]} 
+$\forall\sigma\in \Chr^2 \s:
+\sigma \in {\mathit{Cont}_2} \Leftrightarrow \forall v,v' \in \sigma, v\neq v':$
+\small{
+\[((\mathit{View}^1(v) \subsetneq \mathit{View}^1(v'))\wedge(\mathit{View}^2(v') \subsetneq \mathit{View}^2(v)))
+\vee
+((\mathit{View}^1(v') \subsetneq \mathit{View}^1(v))\wedge(\mathit{View}^2(v) \subsetneq \mathit{View}^2(v'))){}.\]}
+\end{definition}
+%
+The set of $2$-contention simplices is inclusion-closed: any face 
+of a $2$-contention simplex is also a $2$-contention simplex. 
+Therefore, we can define  
+the \emph{$2$-contention complex} as the set of all $2$-contention simplices.
+For example, the $2$-contention simplices of the $3$-process system is 
+shown in Figure~\ref{Fig:Contention}.
+
+\begin{figure}
+\center
+\includegraphics[scale=1.2]{Figures/Contention.pdf}
+\caption{\label{Fig:Contention} \small The $2$-contention complex is shown in red in dimension $2$.}
+\end{figure}
+
+\remove{
+\myparagraph{Properties of the $2$-contention simplices.}
+Intuitively, the $2$-contention complex capture the notion
+of concurrency because, firstly, it provides sufficiently few 
+restrictions such that there an algorithm providing simplices 
+in $\Chr^2\s$ exists such that: if $k+1$ processes were executing 
+$k$-concurrently, then this set of processes is not provided 
+with a $k$-dimensional $2$-contention simplex. Moreover,
+it is true even if concurrency restriction is present only 
+for the resolution of the second level of subdivision.
+Indeed, given $k+1$ processes on any of $\Chr\s$ simplices,
+waiting for one of the $k$ processes with smaller carriers
+in $\Chr^\s$ to terminate before executing the process with
+the largest $\Chr^\s$ output will ensure that processes are 
+not provided with a $k$-dimensional $2$-contention simplex as output.
+
+In order to grasp concurrency, the definition of $2$-contention simplices
+must also provide enough restrictions in order for a solution to
+$k$-set consensus exists for the set of all simplices associated 
+to any subset of processes $k+1$ processes which are not 
+$2$-contention simplices.  
+To show that such a solution exist, consider the vertex map $\mu_Q$
+such that $\forall v \in \Chr^2\s, {\mathit{dim}}(v)=0, \chi(v)\in Q$:
+\[
+\mu_Q(v)= \chi(\mathit{min}(\{\Car(v',\s), 
+(v'\in \Car(v,\Chr\s))\wedge({\mathit{dim}}(v')=1)\wedge(\chi(v')\in Q)\})|_Q{}.
+\]
+The vertex map $\mu_Q$ associate to each vertex in $\Chr^2\s$, 
+the smallest set of colors of $Q$ observed in the first level of subdivision
+by a process from $Q$ which is itself observed by $v$ in the second subdivision.
+The number of distinct value provided by $\mu_Q$ on a simplex is linked
+to its faces being $2$-contention simplices according to the following property
+(the proof can be found in Appendix~\ref{Appendix:ModelProperties}):
+
+\begin{restatable}{property}{ContentionComposability}{[$2$-Contention Simplices Agreement]:\label{prop:ContentionComposability}}
+$\forall Q\subseteq\Pi,\forall \sigma\in\Chr^2\s$:\\
+\[\chi(\sigma)\subseteq Q \implies |\mu_P(\sigma)|\leq 
+max(\{\sigma'\subseteq\sigma, \sigma'\in{\mathit{Cont}_2}\}){}.\]
+\end{restatable}
+
+This property easily implies the relation between 
+the restriction on $2$-contention simplices dimensions 
+and the ability to solve the desired agreement 
+among any set of processes for any affine tasks $A\subseteq\Chr^2\s$:
+
+\begin{corollary}{[$2$-Contention and Set Consensus]:} $\forall Q\subseteq\Pi$ :\\
+\[max(\{{\mathit{dim}}(\sigma')-1,\sigma'\subseteq\sigma, \sigma\in A, \chi(\sigma)\subseteq Q, \sigma'\in{\mathit{Cont}_2}\})=k \implies \mu_Q \textrm{\ solves\ } k\textrm{-set\ consensus\ in\ } Q{}.\]
+\end{corollary}
+
+\begin{proof}
+The vertex map $\mu_Q$ is well defined for all vertices of $Q$.
+Indeed As $\Car(\sigma,\s)=\Car(\Car(\sigma,\Chr\s),\s)$, 
+$\mu_Q(v)\subseteq \chi(\Car(v',\s))$ with $v'\in \Car(v,\Chr\s)$ 
+implies that we have~$\mu_Q(v)\subseteq \chi(\Car(v,\s))$. Thus 
+$\mu_Q$ respect carrier inclusion property.
+Moreover, the vertex map $\mu_Q$ provides, to every process of $Q$, 
+non-empty subsets of $Q$ such that at most $k$ distinct sets are provided, cf. Property~\ref{prop:ContentionComposability}.
+Thus any deterministically chosen projection from $2^Q$ to $Q$
+provides on any simplex at most $k$ distinct proposed inputs,
+hence solves $k$-set consensus among $Q$.
+\end{proof}
+}
+
+
+\myparagraph{Critical simplices.}
+%
+Capturing resilience in an affine task~\cite{SHG16} is about ensuring
+that every process is provided with sufficiently large 
+views, i.e., that $\Car(v,\s)$ is ``large enough'' for its vertex $v$.
+%
+%In~\cite{SHG16},
+Providing a view $P$ such that 
+$\alpha(P)>0$ is sufficient to characterize $t$-resilience.
+%
+To see why this is the case, one can observe that if the participating
+set is $P$, then the number of distinct views $V$ with $\alpha(V)>0$
+is exactly $\alpha(P)$.
+%
+In a general $\alpha$-model, however, it is not necessarily the case.
+%the number of
+%distinct views $V$ with $\alpha(V)>0$ can be strictly higher than
+%$\alpha(P)$.  
+%
+%In an $\alpha$-model, the view that a process must obtain 
+%depends on the set consensus power corresponding to the current set of
+%participants.
+%
+%Intuitively,  if a set of processes $Q$ solves $k$-set consensus then 
+%the processes in $Q$ must witness a set of processes $P$ 
+%such that $\alpha(P)\geq k$.
+
+
+The definition of $\R_{\alpha}$ should allows us to determine which
+of the processes having views $V$ with $\alpha(V)>0$ 
+are \emph{prioritized}, i.e., can be used as ``leaders'' in solving
+$\alpha(P)$-set consensus.
+%in order to ensure that $k$-concurrent 
+%executions will observe a high enough participation.
+%
+When the participation is $P$ with $\alpha(P)>0$, a leader 
+with a view $V$ with $\alpha(V)=\alpha(P)$ should be available.
+This is why the number ``leaders'' should scale
+according the set-consensus power of the participation.
+%[[PK no clue where 2-contention comes from here 
+
+\begin{figure}
+\captionsetup[subfigure]{justification=centering}
+  \begin{minipage}[b]{.49\linewidth}
+    \centering
+\includegraphics[scale=1.6]{Figures/critical111.pdf}
+   \subcaption{\footnotesize{Critical simplices for the $\alpha$-model with $\alpha(P)=min(|P|,1)$ ($1$-obstruction-freedom)}}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{.49\linewidth}
+    \begin{center}
+\includegraphics[scale=1.6]{Figures/critical_p1-p2p3-p1p2p3.pdf}
+    \subcaption{\footnotesize{Critical simplices of the $\alpha$-model corresponding to the adversary $\A=\{\{p_1\},\{p_2,p_3\},\{p_1,p_2,p_3\}\}$}}
+    \end{center}
+  \end{minipage}
+  \caption{\small{Critical simplices are displayed in orange (with $p_1$ associated to the vertex on the top).}}
+  \label{fig:critical_examples}
+\end{figure}
+
+But also, the number of set consensus proposals pushed 
+by leaders when the participation is $P$
+should be smaller than $\alpha(P)$.
+Moreover, the leaders must be identifiable to other 
+processes, in order for them to know that they have 
+been prioritized and are not the result
+of a high concurrency.  
+
+To capture this intuition, we introduce the following notion.
+A simplex $\sigma \in \Chr \s$ is a \emph{critical simplex} if and only if:
+(1)~all its vertices share the same carrier;
+and (2)~the set consensus power associated to $\Car(\sigma,\s)$ is 
+strictly greater than the set consensus power of $\chi(\Car(\sigma,\s))\setminus \chi(\sigma)$.
+%(i.e., processes in the carrier of $\sigma$ minus the processes in $\sigma$). 
+
+
+\begin{definition}{} $\forall\alpha\in\mathcal{AF}(\Pi),\forall \sigma\in \Chr \s$:
+\small{
+\[
+\mathit{Critical}_\alpha(\sigma) = (\forall v \in \sigma: \Car(v,\s)=\Car(\sigma,\s))\wedge
+\left(\alpha(\chi(\Car(\sigma,\s))\setminus \chi(\sigma))<\alpha(\chi(\Car(\sigma,\s)))\right){}.
+\]
+}
+\end{definition}
+
+Intuitively, the definition selects simplices which are identifiable 
+by vertices which see them in the second IS because 
+the selection is defined on the first subdivision, 
+which corresponds to the first~IS. 
+Examples of critical simplices for some model of 3-process system are given in Figure~\ref{fig:critical_examples}.
+
+For convenience, given a simplex $\sigma\in\Chr\s$, let $\mathcal{CS}_\alpha(\sigma)$ be 
+the set of critical simplices in $\sigma$, 
+i.e.,~$\mathcal{CS}_\alpha(\sigma)=\{\sigma'\subseteq\sigma:\sigma'\in\mathit{Critical}_\alpha(\sigma)\}$. 
+Moreover, let~$\mathcal{CSM}_\alpha(\sigma)$ be 
+the set of vertices of $\sigma$ which belong to some critical simplex in $\sigma$, 
+i.e.,~$\mathcal{CSM}_\alpha(\sigma)=\cup_{\sigma'\in\mathcal{CS}_\alpha(\sigma)} \sigma'$.
+Similarly, let $\mathcal{CSV}_\alpha(\sigma)$ be the union of all processes observed by
+critical simplices in $\sigma$, i.e., 
+$\mathcal{CSV}_\alpha(\sigma)= \Car(\mathcal{CSM}_\alpha(\sigma),\s)$.
+
+
+\myparagraph{Concurrency map.}
+We note that a critical simplex $\sigma\in\Chr\s$ is associated to 
+a set consensus power, i.e., $\alpha(\chi(\Car(\sigma,\s)))$. 
+A critical simplex associated to some $k$-set consensus power 
+implies the concurrency level to be smaller than or equal to $k$.
+This allow us to define the concurrency level for every simplex in $\Chr \s$ by the concurrency of its critical simplices: 
+
+\begin{figure}
+\captionsetup[subfigure]{justification=centering}
+  \begin{minipage}[b]{.49\linewidth}
+    \centering
+\includegraphics[scale=1.6]{Figures/ConcurrencyMap111.pdf}
+   \subcaption{\footnotesize{Concurrency map for the $\alpha$-model with $\alpha(P)=min(|P|,1)$. (1-obstruction-freedom)}}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{.49\linewidth}
+    \begin{center}
+    \includegraphics[scale=1.6]{Figures/ConcurrencyMap_p1-p2p3-p1p2p3.pdf}
+    \subcaption{\footnotesize{Concurrency map of the $\alpha$-model corresponding to the adversary $\A=\{\{p_1\},\{p_2,p_3\},\{p_1,p_2,p_3\}\}$.}}
+    \end{center}
+  \end{minipage}
+  \caption{\small{Examples of concurrency maps in two models of $3$-process system, a color set to green corresponding to a concurrency value equal to $2$, orange to $1$, and black to $0$. Note that $p_1$ is the vertex on the top.}}
+  \label{fig:concurrencyMap}
+\end{figure}
+
+\begin{definition}{[Concurrency map] }$\forall \alpha\in\mathcal{AF}(\Pi),\forall \sigma\in\Chr \s$:
+\small{
+\[
+\mathit{Conc}_\alpha(\sigma) = max(0\cup\{\alpha(\chi(\Car(\sigma',\s))), \sigma'\in\mathcal{CS}_\alpha(\sigma)\}){}.
+\]
+}
+\end{definition}
+
+Examples of concurrency maps for two models in a $3$-process system are shown in Figure~\ref{fig:concurrencyMap}. 
+
+
+\myparagraph{Affine task $\R_{\alpha}$.} The affine task capturing $\alpha$-models can be simply defined, based on 
+(1) the set of critical simplices members, $\mathcal{CSM}_\alpha$, their
+view, $\mathcal{CSV}_\alpha$, and the concurrency map, $\mathit{Conc}_\alpha$,
+all derived from the definition of critical simplices;
+and (2), the definition of the $2$-contention simplices. 
+
+The sub-complex $\R_{\alpha}\subseteq\Chr^2\s$ is defined as follows: 
+a $(n-1)$-dimensional  simplex $\sigma\in\Chr^2\s$ 
+belongs to $\R_{\alpha}$ if and only if, 
+every sub-simplex of $\sigma$ of size $k$ 
+which is a $2$-contention simplex and 
+which does not contain any critical simplices members from $\Chr \s$,
+nor are processes in their view,
+has a view in $\Chr^2\s$ 
+associated to a concurrency greater than or equal to $k$:
+
+\begin{definition}{[$\R_{\alpha}$] }\label{def:RA}$\forall \alpha\in\mathcal{AF}(\Pi),\forall\sigma\in \Chr^2 \s, {\mathit{dim}}(\sigma)=n-1 : \sigma\in\R_\alpha \Leftrightarrow \forall \theta \subseteq \sigma,\theta'= \Car(\theta,\Chr\s):$
+\small{\[ (\theta\in{\mathit{Cont}_2})\wedge 
+(\chi(\theta) \cap 
+(\chi(\mathcal{CSM}_\alpha(\Car(\sigma,\Chr\s)))
+\cup\chi(\mathcal{CSV}_\alpha(\theta')))
+ = \emptyset 
+ \implies
+{\mathit{dim}}(\theta)-1\leq \mathit{Conc_\alpha(\theta')}{}.
+\]}
+
+\end{definition}
+\begin{figure}
+\captionsetup[subfigure]{justification=centering}
+  \begin{minipage}[b]{.49\linewidth}
+    \centering
+	\includegraphics[scale=0.50]{Figures/111.pdf}
+    \subcaption{\footnotesize{Affine task for the $\alpha$-model with $\alpha(P)=min(|P|,1)$. (1-obstruction-freedom) \label{fig:1-OF}}}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{.49\linewidth}
+    \centering
+	\includegraphics[scale=0.50]{Figures/p1-p2p3-p1p2p3.pdf}
+    \subcaption{\footnotesize{Affine task of the $\alpha$-model corresponding to the adversary $\A=\{\{p_1\},\{p_2,p_3\},\{p_1,p_2,p_3\}\}$.}}
+  \end{minipage}
+  \caption{\small{Some examples of affine tasks $\R_\alpha$ in blue (with $p_1$ associated to the vertex on the top).}}
+  \label{fig:affineTasks}
+\end{figure}
+
+Some examples of affine tasks for some $\alpha$-models 
+in a 3 processes system are depicted in Figure~\ref{fig:affineTasks}.
+
+
+%============================================
+\section{From $\alpha$-model to $\R_{\alpha}$} % simulation from adversaries}
+\label{sec:R}
+%============================================
+
+Let $T$ be any task that can be solved in $\R_{\alpha}^*$, i.e.,
+by iterating our affine task $\R_{\alpha}$.
+To show that $T$ is solvable with a {\fair} adversary $\A$, we present
+an algorithm that,  in the corresponding
+$\alpha$-model, \emph{solves} $\R_{\alpha}$, i.e.,        
+solves the chromatic simplex agreement task
+on the complex $\R_{\alpha}$.
+%
+By iterating this task solution, we obtain a simulation of
+$\R_{\alpha}^*$, which implies a solution to $T$ in the $\alpha$-model.
+
+
+%Solving $\R_\alpha$ is done by a rather simple algorithm executed in the $\alpha$-model.
+In our solution of $\R_{\alpha}$ (Algorithm~\ref{Alg:R_A_resolution}),
+every process $p_i$ takes two immediate snapshots ~\cite{BG97},
+$\mathit{FirstIS}$ and $\mathit{SecondIS}$, where the input of $\mathit{FirstIS}$ is its identifier and the input of $\mathit{SecondIS}$ is the output of $\mathit{FirstIS}$.
+%-
+%
+By construction, the outputs of this algorithm form a simplex in
+$\Chr^2\s$. To ensure that this simplex is in $\R_{\alpha}$,
+after finishing $\mathit{FirstIS}$, each process $p_i$ writes the outcome in its dedicated register
+$\mathit{IS1}[i]$, and then waits for its turn to proceed to 
+$\mathit{SecondIS}$.
+%
+\remove{
+processes execute a first immediate snapshot, 
+share their immediate snapshot output and then wait their 
+``turn'' before executing the second immediate snapshot.
+The structure of the algorithm is quite similar to the one
+proposed in~\cite{SHG16}. Indeed, as for the $t$-resilient
+case, the $\alpha$-model has a structure allowing to directly
+solve $\R_\alpha$ without using simulation techniques as it 
+would be the case for a generic adversarial model. The difference
+with the solution proposed in~\cite{SHG16} just lies in the
+more elaborated conditions which must be satisfied before a 
+process is allowed to continue with the second immediate
+snapshot. 
+}
+The corresponding ``waiting'' conditions are given in 
+Lines~\ref{Alg:RA:WaitBegin}--\ref{Alg:RA:WaitEnd}.
+%
+Once $\mathit{SecondIS}$ is completed, $p_i$
+writes its outcome in $\mathit{IS2}[i]$. 
+%The code for a process $p_i$ is presented in Algorithm~\ref{Alg:R_A_resolution}. 
+%Processes uses two shared arrays of single-write multi-readers read/write registers 
+%$\mathit{IS1}$ and $\mathit{IS2}$, used once per process 
+%to share the output they obtained respectively for 
+%the first and second immediate snapshot executions.
+
+
+
+\begin{algorithm}
+\begin{small}
+ \caption{Algorithm solving $R_{\alpha}$ in the $\alpha$-model for process $p_i$.\label{Alg:R_A_resolution}}
+\SetKwRepeat{Do}{Do}{While}%
+$\mathbf{Shared}$: $\mathit{IS1}[1\dots n] \in \mathcal{P}(\Pi)$, $\mathbf{initially}$ $\emptyset$;
+$\mathit{IS2}[1\dots n] \in \mathcal{P}(\Pi)$, $\mathbf{initially}$ $\emptyset$\;
+$\mathbf{Local}$: $\mathit{critical}[1\dots n] \in
+\{\mathit{true},\mathit{false}\}$,
+$\mathbf{initially}$ $\mathit{false}$;
+$\mathit{concurrency} \in \mathbb{N}$,
+$\mathbf{initially}$ $0$\;
+$\mathit{level}[1\dots n]\in\mathcal{P}(\Pi)$\;
+\vspace{1em}
+
+	$\mathit{IS1}[i] \leftarrow \mathit{FirstIS}(\mathbf{InitialState})$\;
+	\Do{$(\neg critical[i])\wedge(|\{p_j\in\mathit{IS1}[i]: 
+	\mathit{IS2}[j]=\emptyset\wedge
+	\emptyset\subsetneq \mathit{IS1}[j]\subsetneq\mathit{IS1}[i]\wedge
+	\neg \mathit{critical}[j]\}|\geq \mathit{concurrency}
+	)$}{\label{Alg:RA:WaitBegin}
+	  \ForAll{$j\in \{1,\dots,n\}$}{
+                        $\mathit{level}[j] \leftarrow   \{p_k\in \Pi, \mathit{IS1}[k]=\mathit{IS1}[j]\}$\;  
+%			$\mathit{critical}[j] \leftarrow \left(\alpha(\mathit{IS1}[j])>\alpha(\mathit{IS1}[j]\setminus\{p_k\in \Pi, \mathit{IS1}[k]=\mathit{IS1}[j]\})\right)$\;\label{Alg:RA:UpdateCritical}
+                      $\mathit{critical}[j] \leftarrow
+            \left(\alpha(\mathit{IS1}[j])>\alpha(\mathit{IS1}[j]\setminus\mathit{level}[j])\right)$\;\label{Alg:RA:UpdateCritical}
+			
+%	    \If{$\left(\alpha(\mathit{IS1}[j])>\alpha(\mathit{IS1}[j]\setminus\{p_k\in \Pi, \mathit{IS1}[k]=\mathit{IS1}[j]\wedge\mathit{IS2}[j]\neq \emptyset\}\right)$}{
+	    \If{$\left(\alpha(\mathit{IS1}[j])>\alpha(\mathit{IS1}[j]\setminus\{p_k\in
+              \mathit{level}[j], \mathit{IS2}[k]\neq \emptyset\}\right)$}{
+          	    $\mathit{concurrency} \leftarrow \textit{max}(\alpha(\mathit{IS1}[j]),\mathit{concurrency})$\;\label{Alg:RA:UpdateConc}
+ 			}
+		}
+	}\label{Alg:RA:WaitEnd}
+	$\mathit{IS2}[i] \leftarrow \mathit{SecondIS}(\mathit{IS1}[i])$\;		
+		
+\end{small}
+\end{algorithm}
+
+Intuitively, the waiting phase ensures that processes appearing 
+in the critical simplices (maintained in the local
+boolean array $\mathit{critical}$) have higher priority to
+proceed with $\mathit{SecondIS}$.
+%
+If the members of a critical simplex finishes $\mathit{SecondIS}$, then
+the processes with strictly smaller IS1 output are given priority,
+unless their number gets below the currently observed
+``concurrency level'' (stored in the local variable
+$\mathit{concurrency}$). 
+%
+Otherwise, the process can proceed to $\mathit{SecondIS}$.
+%
+Notice that in this case all processes with the same IS1 output will
+also be able to proceed to $\mathit{SecondIS}$. 
+
+
+In its waiting phase, $p_i$ periodically goes over all processes
+ and, based on their outputs in $IS1$ and
+$IS2$, updates $\mathit{critical}$ and $\mathit{concurrency}$.
+%
+${Concurrency}$ is set to the maximal set
+consensus power of the IS1 output of processes in a critical simplex that 
+completed their IS2  (Line~\ref{Alg:RA:UpdateConc}).  
+
+
+%[[PK please check if I did not mess up
+\remove{
+Boolean array $\mathit{critical}$ stores the set of processes whose vertices in
+$\Chr\s$ belong to currently observed critical simplices.
+%
+Integer $\mathit{concurrency}$ stores the maximal set consensus power associated to
+a critical simplex such that all its processes have terminated their
+second IS.
+
+the former corresponds to the increasing set of critical simplices members 
+and the latter corresponds to the highest set consensus power associated to
+a critical simplices such that all its processes have terminated their 
+second immediate snapshot.
+The set of $\mathit{critical}$ processes is updated for every processes at
+line~\ref{Alg:RA:UpdateCritical} by simply checking if the set of processes
+with the same first immediate snapshot output form a critical simplex.
+Similarly, for each process, it is checked if the set of processes
+with the same first immediate snapshot output, but which also terminated their
+second immediate snapshot, also forms a critical simplex. 
+If this is the case, $\mathit{concurrency}$ is updated to this
+critical simplex associated set consensus power, 
+if it is greater than the current value of $\mathit{concurrency}$.
+
+With the two local variables $\mathit{critical}$ and $\mathit{concurrency}$ updated,
+processes then test if they should continue to wait 
+or are allowed to proceed to the second immediate snapshot (at line~\ref{Alg:RA:WaitEnd}). 
+The simplest condition to be allowed to proceed 
+consists in being a critical set member, i.e., $\mathit{critical}[i]=\mathit{true}$. 
+If a process is not a critical set member, 
+then it waits until the number of processes included in 
+its first immediate snapshot output (i.e., $p_j\in\mathit{IS1}[i]$) which, 
+are not members of a critical simplices (i.e., $\mathit{critical}[j]=\mathit{false}$),
+don't have the same first immediate snapshot output 
+(i.e., $\mathit{IS1}[j]\subsetneq\mathit{IS1}[i]$),
+and have not completed their second immediate snapshot (i.e., $\mathit{IS1}[j]=\emptyset$), 
+is strictly smaller than its updated level of $\mathit{concurrency}$.
+Only once one of theses two conditions is satisfied, 
+a process is allowed to proceed to its second immediate snapshot.	
+}
+%]]
+
+\begin{restatable}{theorem}{RalphaThm}
+For all $\alpha\in\mathcal{AF}(\Pi)$, Algorithm~\ref{Alg:R_A_resolution} solves task $\R_\alpha$ in the $\alpha$-model.\label{Thm:RalphaSimulation}
+\end{restatable}
+
+To convince ourselves that Algorithm~\ref{Alg:R_A_resolution} indeed solves
+$\R_\alpha$ in the $\alpha$-model, we show that no correct
+process can be blocked forever in its waiting phase (Lines~\ref{Alg:RA:WaitBegin}--\ref{Alg:RA:WaitEnd}).
+This is because at most $\alpha(P)-1$ processes
+can fail and therefore, at least one critical simplex will finish the $\mathit{SecondIS}$,
+enabling the remaining processes to proceed. 
+%
+Moreover, the more faulty processes try to block non-critical 
+simplices members with small IS1 to finish their $\mathit{SecondIS}$, the 
+less faulty processes are left to block critical simplices 
+from finishing their $\mathit{SecondIS}$. But the more critical simplices 
+finishes their $\mathit{SecondIS}$, the higher the value of $\mathit{concurrency}$ is,
+counter-balancing which processes are faulty.
+
+%[[PK please check if my variant is ok 
+\remove{
+we first observe that eventually every correct process
+either    
+%First, it is not obvious to see that every correct process
+%will eventually exit the wait-phase and output. This is mostly ensured by the structure
+of critical simplices, its members being allowed to continued first before the rest can
+follow as most as possible in the same order than in the first immediate snapshot, 
+just ensuring that at least one process allowed to continue must be correct (if they
+are correct processes left).
+}
+%]]
+
+The second point we need to ensure is that the resulting simplex of
+$\Chr^2\s$ indeed belongs to~$\R_{\alpha}$.
+%
+One can see this by matching the conditions of the waiting phase with the
+definition of $\R_{\alpha}$ (Definition~\ref{def:RA}).  
+%
+%[[PK same here
+\remove{
+consists in showing that the second immediate snapshot outputs 
+provided to the processes forms in $\Chr^2 \s$ a simplex belonging to $\R_\alpha$.
+The fact that it is indeed the case follows mostly from the conditions 
+which must be satisfied in order to exit the wait-phase. 
+Theses conditions are quite close the restrictions required to form a 
+valid $\R_\alpha$ simplex.
+}
+%]]
+The proof of Theorem~\ref{Thm:RalphaSimulation} is given Appendix~\ref{Appendix:RalphaSimulation}.
+
+%===============================================
+\section{From $\R_{\alpha}^*$ to $\alpha$-model}
+\label{sec:alpha}
+%===============================================
+
+In this section, we show that any task solvable in the $\alpha$-model can be solved in $\R_\alpha^*$.
+%
+More precisely, we present an algorithm that, in
+$\R_\alpha^*$, simulates a read-write shared memory system
+in which, additionally, $\alpha$-adaptive set consensus can be solved.
+%
+Then we can use Theorem~\ref{read/writeAndConsensus} to obtain the desired
+result.
+%
+The proofs for this section are delegated to Appendix~\ref{Appendix:alphaSim}.
+
+\myparagraph{General structure of the simulation.}
+In principle, our algorithm simulates read-write operations and
+accesses to instances $\alpha$-adaptive set consensus (almost) independently.
+%
+In each round of $\R_{\alpha}^*$, the input of each process to submit to the affine
+task $\R_{\alpha}$ is composed of a \emph{read-write} part and  
+an \emph{agreement} part. 
+%The main difficulty relies in the fact that
+%
+Even though the simulated algorithm may have only one pending
+operation (read-write or propose for a set consensus instance), our algorithm 
+requires that the process participates in all currently active agreement instances
+and the read-write memory simulation (possibly with ``fake'' inputs
+used to help slower processes to complete their simulated operations). 
+
+In general, such a simulation in $\R_{\alpha}^*$  can only be lock-free,
+i.e., ensuring that at least one process makes progress, 
+as 
+%i.e., guaranteeing progress to all 
+%processes at the same time. Indeed,
+a slow process may never be observed by a fast process in an
+iterated model.
+%In practice, only lock-free progress can be guaranteed, i.e., guaranteeing 
+%that at least one process makes progress.
+Lock-freedom is good enough for us, as we are only interested in solving tasks
+in the simulated model: once a fast process outputs it ``leaves'' the
+computation and does not obstruct slower ones from making progress.
+%As we are only
+%interested in finite computations, i.e., solving a task,
+%this is not an issue as long as progress is guaranteed
+%to a process which as not decided a task output yet if 
+%one remains.
+For this, special input values are  
+used by the decided processes to inform slower processes about the task outputs obtained by
+the faster ones. 
+%know that a task output has been decided and
+%that no new memory or agreement operations will be 
+%accessed by the process.
+
+%First we show that $\R_{\alpha}$, just one iteration of
+%$\R_{alpha}^*$, can be used to solve $\alpha$-adaptive set consensus. 
+%
+%We first recall a simulation of read-write memory in 
+%the iterated snapshot model~\cite{GR10-opodis}. Then 
+%we will present an $\alpha$-adaptive set consensus and show how to combine the two
+%simulations ($\alpha$-adaptive set consensus and read-write memory) in
+%a single lock-free simulation.
+%Recall that a lock-free simulation ensures that at least one correct
+%process completes all of its operations, which is sufficient for
+%simulating any algorithm solving a task in the $\alpha$-model. 
+
+\myparagraph{Read-write simulation.} 
+To simulate a read-write shared memory, we rely upon  
+the lock-free algorithm proposed in~\cite{GR10-opodis}.
+%
+This algorithm, conveniently for us, uses iterated, but not necessarily immediate,
+snapshots.
+%
+Thus, we can execute it in the global view resulting of 
+iterations of $\R_\alpha^*$, i.e., on $\Car(v,\s)$ for a vertex
+$v\in\R_\alpha$. %\pknote{This point (``thus'') is not very clear.} 
+
+%This shared memory simulation is lock-free and also uses 
+%processes to terminate by using a special value in order 
+%to ensure that an non terminated process makes progress.
+To make sure that every active (not yet terminated) participates in
+the read-write simulation in every iteration of $\R_{\alpha}^*$, even if the
+operations is not required by the simulated algorithm, we make the
+process propose the value of its last write operation.
+Notice that these ``fake'' inputs do not affect safety of the
+simulation, but potentially may affect liveness.
+We show that this, however, cannot happen.
+
+%The only difficulty lies in the fact that the algorithm
+%always requires non terminated process to have a pending
+%memory operation until they terminate. 
+%In our case, a process may be non terminated but having 
+%a pending agreement operation. To solve this issue, 
+%we simply make the processes propose again to write
+%the last completed write operation. This does not 
+%impact the safety of the simulation, but it may 
+%impact the liveness by completing infinitely often
+%the same write operation over and over. We will show 
+%that this case cannot happend in the general simulation.
+
+An important feature of our algorithm, 
+is that, even though the algorithm is lock-free but guarantees that 
+if a process completing a simulated read-write operation at the end of a round $r$, 
+has the smallest view in $\R_\alpha$ in that round and, thus, every
+other process in round $r$ will see the it proposes to a set-consensus instance (if it has one). 
+%
+Hence,  once a process completes a write, some progress is made:
+either it is a write operation of the simulated algorithm, or it is a
+``fake'' write, but a simulated access to set
+consensus will be completed.      
+
+
+\myparagraph{Solving $\alpha$-adaptive set consensus in $\R_\alpha^*$.}
+%Let us now show how $\alpha$-adaptive set consensus can be solved in $\R_\alpha^*$.
+%To do so, we will focus on a single agreement object first and then simply 
+%show that any number of such instance can be used independantly.
+%
+%
+In the simulation of accesses to an $\alpha$-adaptive set consensus
+instance, every active process adopts a decided or a proposed
+value as soon as another process is observed with one.
+%We show that the structure of $\R_{\alpha}$ guarantees that the number
+%of decided values 
+%
+%We say that a process is \emph{concerned} by an agreement instance if firstly it 
+%is active (i.e., has not been provided with a task output yet), 
+%and secondly if it has the right to access the agreement object.
+
+We describe below how the structure of $\R_{\alpha}$ is used to choose
+a decided value if no such value is seen.   
+%
+%Then when every concerned processes which are observed in some iteration
+%of $\R_\alpha$ shares a proposal, the structure of $\R_\alpha$ can be 
+%used to safely select a decision value for the agreement object. 
+%In order to be able to do so, at every iteration, processes must 
+%replace their current proposal by a decision estimate based on 
+%$\R_\alpha$ structure in order to ensure that if a process selects
+%a decision, then the number of possible future decision will 
+%satisfy the $\alpha$-adaptive set consensus conditions.
+%
+One issue to be resolved is that, to avoid potential deadlocks, a process
+is expected to take part in an agreement simulation even before it
+completes its first simulated write and, thus, before it is considered
+participating in the simulated run. 
+%The last issue remaining, beside describing the decision estimate
+%selection method based on $\R_\alpha$ structure, is that 
+%processes are forced to participate to an agreement operation
+%even before possibly having completed their first write operation
+%making them participating in the simulated run.
+Thus, we need to ensure that the number of distinct decided values in
+the simulated instance of agreement is allowed by $\alpha$ for the current
+participating set.
+%
+For this, our decision function returns, along with the decided value,
+a set of participating processes. Knowing their input is however not
+sufficient for these processes to appear participating in the
+simulation. This knowledge must be shared with other processes before returning
+from the simulated agreement instance. Taking advantage of the read-write
+simulation, processes can simply write the inputs of these
+processes, which appears in the simulated run as a ``block write.''
+
+%In order to 
+%ensure that the participation in the simulated run is high 
+%enough compared with the number of possible distinct decided
+%value, processes will force other processes to participate 
+%before returning their agreement decision. More precisely,
+%the selection function returning the decision estimate to 
+%select also provides a set of processes which should be 
+%participating before returning. Then, to ensure that theses
+%processes are participating in the simulated run, it can 
+%be simply done by making processes write the initial state
+%of every such processes themselves by using the shared %
+%memory simulation. 
+
+\remove{
+Let us show how to use $\mu_Q$ and ${\mathit{min}}_Q$ to solve an $\alpha$-adaptive set consensus.
+We construct a set-consensus protocol among the subset $A$ of
+$\Pi$ composed of the processes without a task output.
+
+
+Consider the following protocol, for a process $v\in A$:
+(1) Share the set consensus proposal, if available;
+(2) If there exists a process $v'\in\mu_A(v)$ such that 
+$v'\in A$ and $v'$ has a set consensus proposal;
+Then, (2') adopt the proposal of $min_A$ applied to $\mu_A(v)$
+ restricted to the set of processes with a proposal;
+Afterwards, (3) If for every process $v'\in\mu_A(v)$ such that 
+$v'\in A$, $v'$ has a set consensus proposal;
+Then, (3') write the initial state of every process in $\mu_A(v)$
+in shared memory(with a simulation presented thereafter); 
+(3'') return the proposal of $min_A\circ \mu_A(v)$. 
+
+The first aspect of the set consensus protocol consists in 
+waiting for every process without a task output to participate to 
+in the set consensus protocol, and to participate itself
+as soon as another process with a proposal is 
+observed. When every process observed is participating, then
+the process first writes the returned participation, $\mu_A(v)$, in 
+memory. This 
+step is there to ensure that the current participation
+is large enough. Note that there is no problem to share
+the input value of another process that are not yet participating.
+Only then processes return the proposal of $min_A\circ \mu_A(v)$.
+}
+
+\myparagraph{Selecting a decision estimate.}
+Given $Q\subseteq\Pi$, we introduce a vertex map $\mu_Q$ defined on all vertices
+$v\in\R_\alpha$ such that $\chi(v)\in Q$.
+Intuitively, $Q$ is the current set of active processes and $\mu_Q(v)$ is
+a set of processes (intersecting with $Q$) that should appear participating before the
+decided value is returned.
+Formally:
+%map $\mu_Q$ is defined as follows, for $v\in\R_\alpha, \chi(v)\in Q$:
+\begin{small}
+\[
+\mu_Q(v) = \mathbf{\ if\ } (\chi(\mathcal{CSV}_\alpha(\Car(v,\Chr\s)))\cap Q\neq \emptyset)
+\]
+\[
+\mathbf{then\ } 
+\chi(min(\{\Car(\sigma',\s): (\sigma'\in CS_\alpha(\Car(v,\Chr\s)): \chi(\Car(\sigma',\s))\cap Q\neq\emptyset)\})
+\]\[
+\mathbf{else\ } 
+\chi(\mathit{min}(\{\Car(v',\s): 
+(v'\in \Car(v,\Chr\s))\wedge({\mathit{dim}}(v')=0)\wedge(\Car(v',\s)\cap Q\neq\emptyset)\}) {}. 
+\]
+\end{small}
+
+\noindent
+We list below several important properties of $\mu_Q$.
+
+%To be valid set of processes expected to be participating, 
+%processes must be selected in the set of processes which have been observed
+%and thus which the input state is known.
+We show first that $\mu_Q$ indeed returns a valid set of processes
+with inputs (a subset of the view $v$), which moreover intersects with $Q$:
+%\begin{small}
+\begin{restatable}{property}{muQVal}{[Validity of $\mu_Q$]\label{muQ_validity}}
+$\forall v\in\R_\alpha, {\mathit{dim}}(v)=0, \chi(v)\in Q : $
+\[(\mu_Q(v)\subseteq\chi(\Car(v,\s)))\wedge(\mu_Q(v)\cap Q\neq\emptyset){}.\]
+\end{restatable}
+%\end{small}
+
+\noindent
+The principal guarantee $\mu_Q$ needs to ensure is that the number of
+distinct sets returned by $\mu_Q$ for a given simplex in $\R_{\alpha}$
+cannot exceed the set consensus power of the union of these sets:
+%The main property of $\mu_Q$ which will give rise to sufficient 
+%agreement for the forced level of participation, concerns the relation between 
+%the number of distinct sets returned by $\mu_Q$ and 
+%the set consensus power of $\mu_Q$ returned set of processes as follows:
+%\begin{small}
+\begin{restatable}{property}{muQAg}{[Agreement of $\mu_Q$]\label{muQ_agreement}}
+$\forall Q\subseteq\Pi, (\forall \sigma\in\R_\alpha:{\mathit{dim}}(\sigma)= n-1),
+(\forall \theta\subseteq\sigma: \chi(\theta)\subseteq Q) :$
+\[ |\{\mu_Q(v):v\in\theta\}|\leq \alpha(\cup_{v\in\theta}(\mu_Q(v))){}.\]
+\end{restatable}
+%\end{small}
+
+\noindent Finally, let us also observe that set $Q$ 
+can be determined locally based on the process view, i.e.,
+the output of $\mu_Q$ is determined solely by the observed  set of
+terminated processes: 
+%knowing \emph{all} terminated processes is not necessary and 
+%the one observed suffice to obtain the same output for $\mu_Q$:
+%\begin{small}
+\begin{restatable}{property}{muQRb}{[Robustness of $\mu_Q$]}
+$\forall v\in\R_\alpha, {\mathit{dim}}(v)=0, \forall Q\subseteq \Pi:$
+\[\mu_Q(v) = \mu_{\Car(v,\s)\cap Q}(v){}.\]
+\end{restatable}
+%\end{small}
+
+Map $\mu_Q$ can then be used to provide an estimate of the decided
+value in an agreement instance.
+%A deterministic function mapping to the returned sets by $\mu_Q$ processes
+%in $Q$ must be also used.
+This is done by selecting any process in the set returned by $\mu_Q$
+that belongs to $Q$ and has a proposal value. 
+Let ${\mathit{min}}_Q$ be the function returning the minimal such process.   
+%minimal element in $Q$ with a proposal value in the set returned by $\mu_Q$.
+%
+Note that ${\mathit{min}}_Q$ preserves
+the robustness property of $\mu_Q$. 
+%
+It can be shown that if every process has a proposal value, 
+then the map ${\mathit{min}}_Q \circ \mu_Q$ defines a decision
+map for a set consensus algorithm such that:
+%\begin{small}
+\begin{restatable}{property}{muQCons}{\label{muQ_set-consensus}}
+$\forall Q\subseteq\Pi, (\forall \sigma\in\R_\alpha:{\mathit{dim}}(\sigma)= n-1),
+(\forall \theta\subseteq\sigma: \chi(\theta)\subseteq Q): {\mathit{min}}_Q \circ \mu_Q(\sigma)$ solves and $\alpha(\cup_{v\in\theta}(\mu_Q(v)))$-set consensus.
+\end{restatable}
+%\end{small}
+
+\myparagraph{Combined shared memory and $\alpha$-adaptive set consensus simulation.}
+Let us first show that if a "sufficiently fast" process is participating 
+in our $\alpha$-adaptive set consensus algorithm, then it must eventually 
+terminate:
+\begin{restatable}{lemma}{alphaPSC}{\label{AgreementProgress}}
+If a process in $A$ with a minimal view in some iteration of $\R_\alpha$ shares a 
+proposal, then the described protocol solves $\alpha$-adaptive set consensus.
+\end{restatable}
+
+\noindent Note that multiple set consensus protocols can be executed 
+in parallel without interfering. 
+
+With such a property, we can now show that the combination of the
+read-write memory protocol and the $\alpha$-adaptive set consensus
+protocols ensures progress to some active simulated process
+as long as there is one:
+%
+\begin{restatable}{lemma}{MemSCcombined}
+The read-write shared memory with access to set consensus simulation is lock-free.
+\end{restatable}
+%
+By Theorem~\ref{read/writeAndConsensus}, the resulting combination of
+read-write memory and $\alpha$-adaptive set consensus can be used to solve 
+any task solvable in the $\alpha$-model.
+Finally, Theorem~\ref{Thm:RalphaSimulation} and
+Theorem~\ref{th:adv:task} imply:
+
+\begin{theorem}\label{ref:main}
+Let $\A$ be any fair adversary, and let $\alpha$ be its agreement
+function.
+A task is solvable in the adversarial $\A$-model if and only if it
+solvable in  $\R_{\alpha}^*$.
+\end{theorem}
+
+As a side result, we get the following generalization of the
+Asynchronous Computability Theorem (ACT)~\cite{HS99}:
+
+\begin{theorem}{[Compact ACT]}\label{ref:cact}
+Let $\A$ be any fair adversary, and let $\alpha$ be its agreement
+function.
+A task $T=(\I,\O,\Delta)$ is solvable in the adversarial $\A$-model
+if and only if there exists a natural number $\ell$ and a simplicial map
+$\phi: \R_{\alpha}^{\ell}(\I) \rightarrow \O$ carried by $\Delta$.
+\end{theorem}  
+
+
+%======================
+\section{Related work}
+\label{sec:related}
+%======================
+
+%\myparagraph{Related work.}
+%
+%The BGG simulation technique (named after Borowsky, Gafni, and
+%Guerraoui) combines ideas of~\cite{BG93a,Gaf09-EBG,GG09,GG11-univ} to
+%allow a read-write shared-memory system in which $k$-set consensus can be
+%solved to simulated any $k$-process read-write algorithm.
+%Details on the technique can be found in~\cite{GHKR16,KR17-TR}.
+%
+Inspired by the model of \emph{dependent failures}
+proposed by Junqueira and Marzullo~\cite{JM07-cores},
+Delporte et al.~\cite{DFGT11} suggested the notion of adversaries.
+%The calculation of the set consensus power of an adversary
+%(called \emph{disagreement power} in~\cite{DFGT11}) used
+%in this paper was proposed by Gafni and Kuznetsov in~\cite{GK11}.
+Adversaries having the same set consensus power agree on the set
+of \emph{colorless} tasks they solve~\cite{DFGT11,GK11}.
+Intuitively, a colorless task, such as consensus or approximate agreement, %~\cite{BG93b,BGLR01}
+can be defined as a map between a set of inputs and possible sets of
+outputs, without the notion of process identifiers.
+
+%The ability of an adversary $\A$ to solve colorless tasks is precisely
+%captured by its \emph{set consensus
+%  power}~\cite{DFGT11}\footnote{Although the notion is called
+%  disagreement power in~\cite{DFGT11}, we chose a more informative
+%  name proposed in~\cite{GK10}.}.
+%The set consensus power of $\A$, that can be defined through the formula
+%proposed in~\cite{GK10}, determines the smallest $k$ such that $k$-set consensus can be solved in
+%assuming $\A$.
+%  
+%Adversaries having the same set consensus power agree on the set
+%of colorless tasks they solve.
+
+Herlihy and Shavit~\cite{HS99} proposed a 
+characterization of wait-free task computability through the
+existence of a specific continuous map from a subdivision 
+of the input complex of a task $\I$ to its output complex $\O$.
+(The reader is referred to~\cite{HKR14} for a thorough discussion of the use of combinatorial topology 
+in distributed computability.)
+In particular, the characterization can consider the \emph{iterated} standard
+chromatic subdivision and, thus, derive that a task is wait-free
+solvable if and only if it can be solved in the IIS model
+(capturing precisely by iterated standard chromatic subdivision~\cite{Koz12}).
+Thus, the IS task is the affine task matching the wait-free model.
+This paper generalizes this result to any {\fair} adversary. 
+
+Herlihy and Rajsbaum~\cite{HR12}
+studied colorless task computability
+in the special case of \emph{superset-closed} adversaries~\cite{Kuz12},
+that, intuitively, do not expect any set of processes 
+fail and are, thus, closed under the superset operation.
+The set consensus power of a superset-closed adversary is its minimum \emph{core size}:
+the size of a smallest set of processes that intersects with
+every live set~\cite{JM07-cores}.
+%
+They show that the protocol complex of a superset-closed adversary with 
+\emph{minimal core size} $c$ is $(c-2)$-connected.
+This result, obtained via an iterative application of the Nerve lemma, gives
+a combinatorial characterization of superset-closed adversaries, which
+is weaker than the characterization of wait-freedom through
+the immediate snapshot task.
+%
+Unlike the results of this paper, the characterization only applies to colorless tasks, and it does not allow us to express the
+adversary in a \emph{compact} way via a specific task whose iterations
+give an equivalent model.  
+
+Gafni et al.~\cite{GKM14-podc} characterized task computability in
+\emph{iterated} adversarial models via infinite subdivisions of input
+complexes, assuming a limited notion of solvability
+that only guarantees outputs to ``fast'' processes~\cite{Gaf98,RS12,BGK14} (''seen'' by every other
+process infinitely often).
+%
+The liveness property defined in this
+paper for iterated models, guarantees outputs for \emph{every}
+process, which allowed us to establish a task-computability equivalence with 
+conventional non-iterated ones. 
+
+Saraph et al.~\cite{SHG16} gave a compact combinatorial
+characterization of $t$-resilient  task computability.
+Note that $\A_t$ is a superset-closed (and thus {\fair}) adversary.
+Our solution of the affine task  $\R_{\alpha}$ in the $\alpha$-model
+is inspired by the $t$-resilient solution of $T_t$ in~\cite{SHG16}.   
+%
+Gafni et al.~\cite{GHKR16} presented affine tasks for the model of $k$-set consensus and, thus,
+$k$-concurrency and $k$-obstruction-freedom, which can be expressed as
+a symmetric and thus {\fair} adversary.
+%
+
+The notions of an agreement function and a fair adversary were introduced by the first two
+authors in~\cite{KR17}.
+%It has been shown in~\cite{KR17} how to compute
+One can determine the agreement function of any given adversary
+using the formula suggested earlier for the
+set consensus power~\cite{GK10}. 
+It has been shown in~\cite{KR17} that agreement functions encode enough information to
+characterize the task computability of any {\fair}
+adversary.
+%
+
+%This paper generalizes all earlier combinatorial characterizations of task
+%computability, as it applies to all tasks and all {\fair} adversaries. 
+
+
+\section{Discussion}
+\label{sec:disc}
+%
+This paper generalizes all topological
+characterizations of distributed computing models known so
+far~\cite{HS99,GKM14-podc,GHKR16,SHG16}.
+It applies to all tasks (not necessarily colorless) and all {\fair}
+adversarial models (not necessarily the model of $t$-resilience or $k$-obstruction-freedom).
+{\Fair} adversaries include superset-closed~\cite{Kuz12} and symmetric~\cite{Tau10}
+ones. 
+%
+Just as the wait-free characterization~\cite{HS99} implies that the IS task captures the
+wait-free model, our characterization equates any {\fair} adversary with
+a (compact) affine task embedded in the $2$-degree of standard chromatic subdivision.  
+
+Interestingly, unlike~\cite{SHG16}, we cannot
+rely on the assumption that the 
+affine task $\R_{\A_t}$ corresponding to the $t$-resilient adversary $\A_t$
+is \emph{shellable}~\cite{HKR14} and, thus, link
+connected.
+%
+Link-connectivity of a simplicial complex $\C$ allows us to work in the \emph{point
+set} of its geometrical embedding $|\C|$ and use continuous maps (as opposed to
+simplicial maps that maintain more structure).
+%
+For example, the existence of a continuous map from $|\R_{\A_t}|$ to
+any $|\R_{\A_t}^k|$ implies that $\R_{\A_t}$ indeed captures the
+general task computability of $\A_t$.
+%
+However, the existence of a continuous map onto $\C$ only allows us to
+converge on only \emph{one} vertex~\cite{HKR14}.
+If $\C$ is not link-connected, converging on one vertex allow
+us to compute only one output in a task solution and not more, which is not
+sufficient to solve a general (colored) task.      
+
+%
+Unfortunately, only very special adversaries, such as $\A_t$, have
+link-connected counterparts (see, e.g., 
+the affine task corresponding to $1$-obstruction freedom in Figure~\ref{fig:1-OF}). 
+%
+Instead, this paper takes an explicit algorithmic way of
+showing that iterations of $\R_{A}$ simulate $\A$.   
+%
+This raises an interesting question to which extent point-set topology
+and continuous maps can be applied in affine characterizations.  
+
+Furthermore, going beyond {\fair} models is an important
+challenge.
+%
+Given that some models out of this class cannot be grasped by
+agreement functions (some examples of these models can be found
+in~\cite{KR17}), we should find a more refined
+way of to capture the power of solving set
+consensus for subsets of participating processes. In particular, we should be able to account for models
+in which \emph{coalitions} of participants can achieve better levels of set
+consensus than the whole set.  
+%
+Nailed down, this may allow us to compactly capture all ``natural''
+models~\cite{GHKR16},  such as, e.g., the model of \emph{set
+consensus collections}~\cite{DFGK16} for which only special cases of
+$k$-set consensus~\cite{GHKR16} and $k$-test-and-set have
+been, in this sense, understood so far. 
+
+
+\bibliographystyle{abbrv}
+\bibliography{references}
+
+\newpage
+
+\appendix 
+
+%=======================================
+\section{Simplicial complexes}
+\label{app:topprimer}
+%=======================================
+
+We recall now several notions from combinatorial topology. For more detailed coverage of the topic please refer
+to~\cite{Spanier,HKR14}.
+
+A {\em simplicial complex} is a set $V$, together with a collection $C$ of finite non-empty subsets of $V$ such
+that:
+\begin{enumerate}
+\item For any $v \in V$, the one-element set $\{v\}$ is in $C$;
+\item If $\sigma \in C$ and $\sigma' \subseteq \sigma$, then $\sigma' \in C$.
+\end{enumerate}
+
+The elements of $V$ are called {\em vertices}, and the elements of $C$ are called a {\em simplices}. We usually
+drop $V$ from the notation, and refer to the simplicial complex as $C$.
+
+%A simplicial complex $C$ is called {\em finite} if the collection $C$ is finite. A weaker notion is {\em
+%locally finite}: $C$ is said to be locally finite if every vertex of $C$ belongs to only finitely many simplices
+%in $C$. For simplicity, we will assume that our complexes are locally finite.
+
+A subset of a simplex is called a {\em face} of that simplex.
+
+A {\em sub-complex} of $C$ is a subset of $C$ that is also a simplicial complex.
+
+The {\em dimension} of a simplex $\sigma \in C$ is its cardinality minus one. The $k$-skeleton of a complex $C$,
+denoted $\Skel^k C$, is the sub-complex formed of all simplices of $C$ of dimension $k$ or less.
+
+A simplicial complex $C$ is called {\em pure} of dimension $n$ if $C$ has no simplices of dimension $> n$, and
+every $k$-dimensional simplex of $C$ (for $k < n$) is a face of an $n$-dimensional simplex of $C$.
+
+%Given a simplex $\sigma \in C$, we denote by $\st \sigma$ the {\em open star} of $\sigma$, that is, the set of
+%all simplices in $C$ that have $\sigma$ as a face. The {\em closed star} of $\sigma$, denoted $\St \sigma$, is
+%the smallest simplicial complex that contains $\st \sigma$. The difference $(\St \sigma) \setminus (\st \sigma)$
+%is called the {\em link} of $\sigma$.
+
+Let $A$ and $B$ be simplicial complexes. A map $f: A \to B$ is called {\em simplicial} if it is induced by a map
+on vertices; that is, $f$ maps vertices to vertices, and for any $\sigma \in A$, we have $$ f(\sigma) =
+\bigcup_{v \in \sigma} f(\{v\}).$$ A simplicial map $f$ is called {\em non-collapsing} (or {\em
+dimension-preserving}) if $\dim f(\sigma) = \dim \sigma$ for all
+$\sigma \in A$.
+
+A map $\Phi: A \rightarrow 2^B$ (mapping simplices of $A$ to
+sub-complexes of $B$) is called \emph{carrier} if for all $\tau,\sigma
+\in A$, we have
+$\Phi(\tau\cap\sigma)\subseteq\Phi(\tau)\cap\Phi(\sigma)$.
+A simplicial map $\phi: A\rightarrow B$ is said to be \emph{carried by
+  a carrier map $\Phi:A\to2^B$} if for all $\sigma\in A$,
+$\phi(\sigma) \subset \Phi(\sigma)$.
+
+
+
+Any simplicial complex $C$ has an associated {\em geometric realization} $|C|$, defined as follows. Let $V$ be
+the set of vertices in $C$. As a set, we let $C$ be the subset of $[0,1]^V = \{\alpha : V \to [0,1]\}$
+consisting of all functions $\alpha$ such that $\{ v \in V \mid \alpha(v) > 0 \} \in C$ and $\sum_{v \in V}
+\alpha(v) = 1$.
+For each $\sigma \in C$, we set $|\sigma| = \{ \alpha \in |C| \mid \alpha(v) \neq 0 \Rightarrow v \in \sigma
+\}.$ Each $|\sigma|$ is in one-to-one correspondence to a subset of $\R^n$ of the form $\{(x_1, \dots, x_n) \in
+[0,1]^n \mid \sum x_i = 1\}.$ We
+put a metric on $|C|$ by $d(\alpha, \beta) = \sum_{v \in V} |\alpha(v) - \beta(v)|.$ 
+
+%Given a simplicial map $f: A \to B$, there is an associated continuous, piecewise linear map $|f|: |A| \to
+%|B|$, defined by the formula
+%$$ |f|(\alpha)(v') = \sum_{f(v) = v'} \alpha(v).$$
+
+A non-empty complex $C$ is called {\em $k$-connected} if, for each $m\leq k$, any continuous map of the
+$m$-sphere into $|C|$ can be extended to a continuous map over the $(m+1)$-disk.
+
+A {\em subdivision} of a simplicial complex $C$ is a simplicial complex $C'$ such that:
+\begin{enumerate}
+\item The vertices of $C'$ are points of $|C|$.
+
+\item For any $\sigma' \in C'$, there exists $\sigma \in C$ such that $\sigma' \subset |\sigma|$.
+
+\item The piecewise linear map $|C'| \to |C|$ mapping each vertex of $C'$ to the corresponding point of $C$ is a
+homeomorphism.
+\end{enumerate}
+
+%In particular, every complex $C$ admits a {\em barycentric
+%  subdivision} $\Bary(C)$, defined as follows. The vertices of
+%$\Bary(K)$ are the barycenters of the simplices of $C$ (in the
+%geometric realization). The simplices of $\Bary(K)$ correspond to
+%ordered sequences $(\sigma_0, \dots, \sigma_m)$ of simplices of $C$,
+%where $\sigma_i$ is a face of $\sigma_{i+1}$; the barycenters of
+%$\sigma_i$ are then the vertices of the  corresponding simplex in $\Bary(K)$.
+
+%By iterating this construction $k$ times we obtain the $k$th barycentric subdivision, $\Bary^k(C)$.
+
+\myparagraph{Chromatic complexes.}
+%
+We now turn to the chromatic complexes used in distributed computing, and recall some notions from \cite{HS99}.
+
+Fix $n \geq 0$. The {\em standard $n$-simplex} $\s$ has $n+1$ vertices, in one-to-one correspondence with $n+1$
+{\em colors} $0, 1, \dots, n$. A face $\t$ of $\s$ is specified by a collection of vertices from $\{0, \dots,
+n\}$. We view $\s$ as a complex, with its simplices being all possible faces $\t$.
+%Note that the open star of a
+%face $\t$ is $\st \t = \{\t' \mid \t \subseteq \t' \},$ while the
+%closed star of any face is the whole simplex $\s$.
+
+A {\em chromatic complex} is a simplicial complex $C$ together with a non-collapsing simplicial map $\chi: C \to
+\s$. Note that $C$ can have dimension at most $n$. We usually drop $\chi$ from the notation. We write $\chi(C)$
+for the union of $\chi(v)$ over all vertices $v \in C$. Note that if $C' \subseteq C$ is a sub-complex of a
+chromatic complex, it inherits a chromatic structure by restriction.
+
+In particular, the standard $n$-simplex $\s$ is a chromatic complex, with $\chi$ being the identity.
+
+Every chromatic complex $C$ has a {\em standard chromatic subdivision} $\Chr C$. Let us first define $\Chr \s$
+for the standard simplex $\s$. The vertices of $\Chr \s$ are pairs $(i, \t)$, where $i \in \{0,1 ,\dots, n\}$
+and $\t$ is a face of $\s$ containing $i$. We let $\chi(i, \t) = i$. Further, $\Chr s$ is characterized by its
+$n$-simplices; these are the $(n+1)$-tuples $((0,\t_0), \dots, (n, \t_n))$ such that:
+\begin{enumerate}[(a)]
+\item For all $\t_i$ and $\t_j$, one is a face of the other;
+\item If $j \in \t_i$, then $\t_j \subseteq \t_i$. 
+\end{enumerate} 
+The geometric realization of $\s$ can be taken to be the set $\{\x=(x_0, \dots, x_n) \in [0,1]^{n+1} \mid \sum
+x_i = 1\},$ where the vertex $i$ corresponding to the point $\x^i$ with $i$ coordinate $1$ and all others
+coordinate $0$. Then, we can identify a vertex $(i, \t)$ of $\Chr \s$ with the point
+\[
+\frac{1}{2k-1} \x_i + \frac{2}{2k-1} \Bigl( \sum_{\{j \in \t \mid j \neq i\}} \x_j \Bigr) \ \in |\s| \subset
+\R^{n+1},
+\]
+where $k$ is the cardinality of $\t$. 
+%(Compare \cite[Definition 5.7]{HS99}.) 
+Thus, $\Chr \s$ becomes a subdivision of $\s$ and the geometric realizations are identical: $|\s|=|\Chr \s|$. The standard chromatic subdivision, $\Chr\s$, is illustrated for a 3-process system in Figure~\ref{Fig:scs}(a).
+
+%\begin{wrapfigure}{r}{0.45\textwidth}
+%\center
+%\includegraphics[scale=0.50]{Figures/scs_other.pdf}
+%\caption{\label{Fig:scs} \small The standard chromatic subdivision of $\s$ in dimension $2$.}
+%\end{wrapfigure}
+
+Next, given a chromatic complex $C$, we let $\Chr C$ be the subdivision of $C$ obtained by replacing each
+simplex in $C$ with its chromatic subdivision. Thus, the vertices of $\Chr C$ are pairs $(p, \sigma)$, where $p$
+is a vertex of $C$ and $\sigma$ is a simplex of $C$ containing $p$. If we iterate this process  $m$ times we
+obtain the $m\th$ chromatic subdivision, $\Chr^m C$.
+
+Let $A$ and $B$ be chromatic complexes. A simplicial map $f: A \to B$ is called a {\em chromatic map} if for all
+vertices $v \in A$, we have $\chi(v) = \chi(f(v))$. Note that a chromatic map is automatically non-collapsing. A
+chromatic map has chromatic subdivisions $\Chr^m f: \Chr^m A \to \Chr^m B$. Under the identifications of
+topological spaces $|A| \cong |\Chr^m A|, |B| \cong |\Chr^m B|,$ the continuous maps $|f|$ and $|\Chr^m f|$ are identical.
+
+A simplicial map $\phi$ is carried by the carrier
+map $\Delta$ if $\phi(\sigma) \subset \Delta(\sigma)$ for every simplex $\sigma$ in their
+domain.
+
+%A {\em chromatic multi-map} between $A$ and $B$ is a map $\Delta: A
+%\to 2^B$ that, for any $m \leq n$, takes every $m$-simplex of $A$ to
+%a pure $m$-dimensional sub-complex of $B$, such that: (i) For every
+%simplex $\sigma$ of $A$, we have $\chi(\sigma) =
+%\chi(\Delta(\sigma))$, and (ii) For all simplices $\sigma, \tau \in
+%A$,  we have
+%$ \Delta(\sigma \cap \tau) \subseteq \Delta(\sigma) \cap
+%\Delta(\tau).$ In particular, 
+%if $\sigma'$ is a face of $\sigma$, then $\Delta(\sigma') \subseteq \Delta(\sigma).$
+
+%============================================
+\section{Proof of correctness of Algorithm~\ref{Alg:R_A_resolution}}
+%============================================
+
+\label{Appendix:RalphaSimulation}
+
+%\CSAvaibility*
+
+\begin{restatable}{lemma}{CSAvaibility}{[Availability of critical simplices]:\label{lemma:CSAvaibility}}
+$\forall\alpha\in\mathcal{AF}(\Pi),\forall\sigma\in\Chr\s:$
+\[\chi(\sigma)=\chi(\Car(\sigma)) \implies 
+\alpha(\chi(\sigma))\leq \HSS(\mathcal{CS}_\alpha(\sigma)){}.\]
+\end{restatable}
+
+\begin{proof} 
+We proceed by induction on ${\mathit{dim}}(\sigma)$. 
+The base case is trivial, as 
+$\HSS(\emptyset)=0$ and $\alpha(\emptyset)=0$.
+Now consider a simplex $\sigma\in\Chr\s$ such that 
+$\chi(\sigma)=\chi(\Car(\sigma))$ and~$\alpha(\chi(\sigma))= k$, $k\in\mathbb{N}$. 
+Let us assume by induction that for all $\sigma'\in \Chr \s$ such that 
+${\mathit{dim}}(\sigma')<{\mathit{dim}}(\sigma)$ and $\chi(\sigma')=\chi(\Car(\sigma'))$, we 
+have~$\alpha(\chi(\sigma'))\leq \HSS(\mathcal{CS}_\alpha(\sigma'))$.
+
+Now consider the face $\theta$ of $\sigma$ consisting of all vertices of $\sigma$ with the
+same carrier as $\sigma$, i.e., $\theta=\{v\in\sigma, \Car(v,\s)=\Car(\sigma,\s)\}$. 
+Let $\beta$ be the complement of $\theta$, i.e., $\beta=\sigma\setminus\theta$.
+Note that $\theta\neq\emptyset$ and that $\chi(\beta)=\chi(\Car(\beta))$.
+Therefore ${\mathit{dim}}(\beta)<{\mathit{dim}}(\sigma)$ and by assumption we have 
+$\alpha(\chi(\beta))\leq \HSS(\mathcal{CS}_\alpha(\beta))$.
+By the definition of~$\mathcal{CS}_\alpha$, we have 
+$\left(\mathcal{CS}_\alpha(\beta)\cup\mathcal{CS}_\alpha(\theta)\right)\subseteq \mathcal{CS}_\alpha(\sigma)$.
+Therefore if $\alpha(\chi(\beta))=\alpha(\chi(\sigma))$, we 
+have~$\alpha(\chi(\sigma))\leq \HSS(\mathcal{CS}_\alpha(\sigma))$.
+
+Thus, let us assume that $\alpha(\chi(\sigma))=\alpha(\chi(\beta))+l$ with $l>0$.
+Note that given any $P\subseteq\Pi$, $P\neq\emptyset$, and any~$p\in P$ we have 
+$\alpha(P)\geq\alpha(P\setminus\{p\})\geq\alpha(P)-1$\footnote{Indeed, $\alpha$
+is an agreement function derived from an adversary $\A$ and so 
+$\alpha(P\cup\{p\})\leq \alpha(P)+1$ as by definition $\setcon(\A|_{P\cup\{p\}})\leq \setcon(\A|_P)+1$ . 
+Note that this might not be true for generic $\alpha$ models. Moreover, this 
+is the only necessary condition for our equivalence result to hold for generic
+$\alpha$ models.}. 
+Therefore, by a trivial induction we can deduce that for any set of 
+processes $Q\subseteq P$, we have $\alpha(P)\geq\alpha(P\setminus Q)\geq\alpha(P)-|Q|$ 
+or equivalently $\alpha(P\setminus Q)+|Q|\geq\alpha(P)$.
+So for any subset $\theta'$ of $\theta$ of size ${\mathit{dim}}(\theta)-l+1$, $\chi(\sigma)\setminus\chi(\theta')$ contains $l-1$ more processes than $\chi(\beta)$ and so we have:
+\[
+\alpha(\chi(\sigma)\setminus(\chi(\theta')))\leq 
+\alpha(\chi(\beta))+l-1<
+\alpha(\chi(\sigma)){}.
+\]
+Therefore, $\theta'\in CS_\alpha(\sigma)$. 
+Indeed, for every $v\in\theta'$ we have 
+$\Car(v,\s)=\Car(\sigma,\s)=\Car(\theta',\s)$.
+Moreover, as by assumption we have $\chi(\sigma)=\chi(\Car(\sigma,\s))$,
+we obtain $\alpha(\chi(\Car(\theta',\s)))<\alpha(\chi(\Car(\theta',\s))\setminus(\chi(\theta')))$.
+
+This is true for all subsets $\theta'$ of $\theta$ of size ${\mathit{dim}}(\theta)-l+1$.
+It is easy to see that $\HSS(\{\theta'\subseteq\theta, {\mathit{dim}}(\theta')={\mathit{dim}}(\theta)-l+1\})=l$, 
+and thus $\HSS(CS_\alpha(\theta))\geq l$.
+As $\HSS(CS_\alpha(\sigma)) \geq \HSS(CS_\alpha(\theta))+\HSS(CS_\alpha(\beta))$,
+we have $\HSS(CS_\alpha(\sigma)) \geq\alpha(\chi(\sigma))$.
+\end{proof}
+
+\begin{corollary}{[Distribution of critical simplices]:\label{lemma:CSDistribution}}
+$\forall\alpha\in\mathcal{AF}(\Pi),\forall\sigma\in\Chr\s,\forall l\in\{1,\dots,n\}$
+\[\chi(\sigma)=\chi(\Car(\sigma)) \implies 
+\alpha(\chi(\sigma))-l+1\leq \HSS(\{\sigma'\in\mathcal{CS}_\alpha(\sigma), \alpha(\chi(\Car(\sigma',\s)))\geq l\}){}.\]
+\end{corollary}
+
+\begin{proof}
+Consider the face $\theta$ of $\sigma$ consisting of 
+all vertices of $\sigma$ such that their carrier is associated 
+with a set consensus power greater than $\alpha(\chi(\sigma))-l+1$, 
+i.e., $\theta = \{v\in \sigma, \alpha(\chi(\Car(v,\s)))\geq l\}$.
+It is easy to see 
+that~$\{\sigma'\in\mathcal{CS}_\alpha(\sigma), \alpha(\chi(\Car(\sigma',\s)))\geq l\}=\mathcal{CS}_\alpha(\theta)$.
+
+Let $\beta$ be the complement of $\theta$ in $\sigma$, i.e., $\beta=\sigma\setminus\theta$. 
+As $\chi(\sigma)=\chi(\Car(\sigma))$, we have $\chi(\beta)=\chi(\Car(\beta))$. 
+Therefore, according to Lemma~\ref{lemma:CSAvaibility} we have 
+$\alpha(\chi(\beta))\leq \HSS(\mathcal{CS}_\alpha(\beta))$, hence 
+$l-1\leq \HSS(\mathcal{CS}_\alpha(\beta))$.
+But as $\left(\mathcal{CS}_\alpha(\beta)\cup\mathcal{CS}_\alpha(\theta)\right)=
+\mathcal{CS}_\alpha(\sigma)$, we obtain 
+$\HSS(\mathcal{CS}_\alpha(\theta))= \HSS(\mathcal{CS}_\alpha(\sigma))-\HSS(\mathcal{CS}_\alpha(\beta))\geq \alpha(\chi(\sigma))-l+1$.
+\end{proof}
+
+\RalphaThm*
+
+\begin{proof} We show first that the set of outputs of the processes
+  indeed belongs to $\R_\alpha$.
+  Then we proceed to the more involved proof of termination.
+\\
+\noindent \textbf{The outputs belong to $\R_\alpha$: } 
+Except for the wait-phase, processes simply execute two rounds of immediate snapshots, 
+therefore the set of outputs belongs to some simplex in $\Chr^2\s$. 
+In order to belong to $\R_\alpha$, only $2$-contention simplices are restricted. 
+Let $\sigma$ be the simplex resulting of the processes outputs. 
+Consider a face $\theta$ of $\sigma$ forming a $2$-contention simplex
+which does not contain any critical simplex member, i.e.,
+$\chi(\theta)\cap\chi(\mathcal{CSM}_\alpha(\Car(\sigma,\Chr\s)))=\emptyset$.
+
+Consider the vertex $v$ in $\theta$, with $i=\chi(v)$, 
+which has the smallest carrier $\Car(v,\theta)$. 
+Note that vertices in a $2$-contention simplex have distinct
+carriers, and so there is a smallest one.
+The variable $\mathit{critical}[i]$ can be set to true 
+only if the parent of $v$ in the first subdivision, i.e.,
+$v'\in\Car(\sigma,\Chr\s)$ such that $\chi(v')=\chi(v)$,
+is part in a critical set of $\Car(\sigma,\Chr\s)$.
+Indeed, the output of $p_i$ first immediate snapshot
+corresponds to $\chi(view^1(v))$, i.e., $\chi(Car(v',\s))$,
+and therefore $\mathit{critical}[i]$ was set to 
+true only if $v'$ belongs to a critical simplex in $\Car(\sigma,\Chr\s)$.
+As $p_i$ exited the wait phase with $\mathit{critical}[i]=\mathit{false}$,
+then the following condition was satisfied:
+\[|\{p_j\in\mathit{IS1}[i], 
+	(\mathit{IS2}[j]=\emptyset)\wedge
+	(\emptyset\subsetneq \mathit{IS1}[j]\subsetneq\mathit{IS1}[i])\wedge
+	(\neg \mathit{critical}[j])\}|< \mathit{concurrency}{}.
+\]
+If $\mathit{IS2}[j]\neq\emptyset$, then $p_j$
+terminated its second immediate snapshot before $p_i$ started it.
+This implies that $p_j$ is associated to a vertex $v_j$ such that
+$\Car(v_j,\Chr\s)\subsetneq\Car(v_j,\Chr\s)$ and so $v_j\not\in \theta$.
+Moreover, $\emptyset\subsetneq \mathit{IS1}[j]\subsetneq\mathit{IS1}[i]$ 
+being false implies, if $j\neq i$, that $View^1(v)\subseteq View^1(v_j)$ 
+and thus $v_j\not\in\theta$ as $v$ as $View^2(v)$ is the smallest. 
+As $\mathit{critical}[j]$ also implies that $v_j\not\in\theta$,
+we obtain that ${\mathit{dim}}(\theta)-1\leq\mathit{concurrency}$ 
+(as $p_i$ is not counted in the set) at the time $p_i$ exited the wait-phase.
+
+All that is left to show is that this value of the $\mathit{concurrency}$
+variable is smaller than or equal to $\mathit{Conc}(\Car(\theta,\Chr\s)$.
+The value of $\mathit{concurrency}$ is set to $k$ if and only if 
+a set of processes which terminated their second immediate snapshot
+forms a critical simplex in $\sigma$ and has a set consensus power
+equal to $k$. Moreover, this critical simplex is a subset of
+$\Car(v,\Chr\s)$ as the processes associated to it completed 
+their second immediate snapshot. 
+Thus, $\mathit{Conc}(\Car(v,\Chr\s)\geq\mathit{concurrency}$.
+Moreover as $\Car(v,\Chr\s)\subseteq\Car(\theta,\Chr\s)$, we have
+$\mathit{Conc}(\Car(\theta,\Chr\s)\geq\mathit{concurrency}$.
+\\
+\noindent $\mathbf{Outputs\ are\ provided\ to\ all\ correct\ processes: }$ Assume that the participation is equal to $P$. Therefore there is at most $\alpha(P)-1$ processes which may have crashed in the $\alpha$-model.
+
+Now let us assume that some correct process did not terminate,
+and let $p_i$ be such a process with the smallest first immediate
+snapshot output.
+This means that it fails infinitely often the test on line~\ref{Alg:RA:WaitEnd}, 
+and in particular after $\mathit{IS1}$ and $\mathit{IS2}$ were modified for the
+last time. Thus the following is always verified for $p_i$:
+\[|\{p_j\in\mathit{IS1}[i], 
+	(\mathit{IS2}[j]=\emptyset)\wedge
+	(\emptyset\subsetneq \mathit{IS1}[j]\subsetneq\mathit{IS1}[i])\wedge
+	(\neg \mathit{critical}[j])\}|\geq \mathit{concurrency}{}.\]
+As $p_i$ is the correct process with the smallest first immediate snapshot output, 
+this set contains only failed processes, as 
+$\emptyset\subsetneq \mathit{IS1}[j]\subsetneq\mathit{IS1}[i]$ is true.
+Let $k$ be the number of such failed processes. 
+
+If any critical simplex with an associated set consensus power strictly
+greater than $k$ was fully simulated in the second immediate snapshot,
+then $\mathit{concurrency}$ would be set to a value greater than $k$ and 
+$p_i$ would have terminated. But according to 
+Corollary~\ref{lemma:CSDistribution}, in any completion
+of the first immediate snapshot outputs to include the failed processes,
+the minimal hitting set size of the critical sets with associated agreement
+power greater than or equal to $k+1$ is greater then or equal to $\alpha(P)-k$.
+Thus it requires at least $\alpha(P)-k$ failed processes to block all these 
+critical simplices. This implies that the $k$ failed processes blocking $p_i$
+and the $\alpha(P)-k$ failed processes blocking the critical simplices 
+must intersect. A process in this intersection is not observed by $p_i$ as a critical simplex
+member, therefore it cannot have written its first immediate snapshot output.
+But if it has not written its first immediate snapshot output, then it is not 
+one of the $k$ failed processes blocking $p_i$---a contradiction. 
+\end{proof}
+
+\section{Proofs of Section~\ref{sec:alpha}}
+
+For convenience, let us recall the definition of $\mu_Q$, and split it into two vertex maps $\gamma_Q$ and $\delta_Q$ as follows:
+\[
+\mu_Q(v) = \mathbf{\ if\ } (\chi(\mathcal{CSV}_\alpha(\Car(v,\Chr\s)))\cap Q\neq \emptyset)
+\mathbf{\ then\ } \delta_Q
+\mathbf{\ else\ } \gamma_Q{}. 
+\]
+With $\gamma_Q$ and $\delta_Q$ defined as follows:
+\begin{small}
+\[\delta_Q=\chi(min(\{\Car(\sigma',\s): (\sigma'\in CS_\alpha(\Car(v,\Chr\s)): \chi(\Car(\sigma',\s))\cap Q\neq\emptyset)\}){}.\]
+\[\gamma_Q = \chi(\mathit{min}(\{\Car(v',\s): 
+(v'\in \Car(v,\Chr\s))\wedge(\mathit{dim}(v')=0)\wedge(\Car(v',\s)\cap Q\neq\emptyset)\}){}.\]
+\label{Appendix:alphaSim}
+\end{small}
+
+\muQVal*
+
+\begin{proof}
+Let us fix some vertex $v\in\R_\alpha$ and some $Q\subseteq\Pi$.
+Both $\gamma_Q$ and $\delta_Q$ return the carrier of a subset of the carrier of $v$. 
+By definition of the carrier, if $\sigma\subseteq\sigma'$ then $|\sigma|\subseteq |\sigma'|$ and
+therefore the carrier of $\sigma$ is a subset of the carrier of $\sigma'$.
+Thus, both $\gamma_Q$ and $\delta_Q$ return a subset of $\Car(\Car(v,\Chr\s),\s)$.
+By transitivity of inclusion and as $\s$ is a subset of $\Chr\s$,
+we have $\Car(\Car(v,\Chr\s),\s)\subseteq\Car(v,\s)$. 
+Therefore, $\mu_Q(v)\subseteq\chi(\Car(v,\s))$.
+
+If $\chi(\mathcal{CSV}_\alpha(\Car(v,\Chr\s)))\cap Q\neq \emptyset$ then there is 
+a critical set in $\Car(v,\Chr\s)$ which intersects with $Q$. 
+Thus $\delta_Q(v)$, and hence $\mu_Q(v)$, returns a set of processes which intersect with $Q$.
+
+Otherwise, $\chi(\mathcal{CSV}_\alpha(\Car(v,\Chr\s)))\cap Q= \emptyset$.
+According to the self-inclusion property of immediate snapshots transferred to 
+carriers, $\chi(v)\in\Car(v,\Chr\s)$ and thus $\chi(v)\in\mathit{View}^1$. 
+Therefore, there is a process $v'\in\Car(v,\Chr\s)$ 
+such that $\chi(\Car(v',\s))\cap Q\neq \emptyset$. Therefore $\gamma_Q$, and hence
+$\mu_Q$, returns a set of processes intersecting with $Q$.
+\end{proof}
+
+Let us show now some auxiliary lemmas that will be used for the proof of Property~\ref{muQ_agreement}:
+
+\begin{lemma}{\label{ContAgreement}}
+$\forall Q\subseteq \Pi, (\forall \sigma \in \Chr^2\s: \chi(\sigma)\subseteq Q):$
+\[(max(\mathit{dim}(\sigma'): \sigma' \subseteq \sigma \wedge \sigma'\in \mathit{Cont}_2\})=k)
+\wedge (\forall v\in\sigma,\exists v'\in\Car(v,\Chr\s),\gamma_Q(v)=\chi(Car(v',\s)))\]
+\[ \implies
+|\{\gamma_Q(v):v\in\sigma\}|\leq k+1{}.\]
+\end{lemma}
+
+\begin{proof}Let us fix some set of processes $Q\subseteq \Pi$ and some simplex $\sigma \in \Chr^2\s$ such that $\chi(\sigma)\subseteq Q$. Consider the vertex $v_1$ of $\sigma$ with one the smallest $View^2(v_1)$ and one the smallest $View^1(v_1)$ among those. According to the definition of $\gamma_Q$ and to the assumption stating that $\gamma_Q$ returns the $View^1(v')$ of a vertex $v'$ of $\sigma$, we can derive that $\gamma_Q(v_1)$ returns $View^1(v_1)$. 
+
+Then let us repeat such an iterative process by selecting the vertex $v_k$ such that $v_k$ has the smallest $View^1(v_k)$ among the processes with the smallest $View^2$ not returning for $\gamma_Q(v)$ the $View^1(v_j)$ of a previously defined $v_j$ with $j<k$. Like before, $v_k$ will return 
+$View^1(v_k)$. 
+
+This construction provides a list of vertices of the same size as the number of distinct $\gamma_Q(v)$ outputs in $\sigma$. Moreover, by construction we have $\mathit{View}^2(v_i)\subsetneq \mathit{View}^2(v_j)$ when $i<j$. But if $\mathit{View}^1(v_i)\subseteq\mathit{View}^1(v_j)$, then $v_j$ would not have returned for $\gamma_Q(v_j)$, $\mathit{View}^1(v_j)$. Thus the sets of $v_i$ forms a $2$-contention simplex, proving the lemma claim.
+\end{proof}
+
+\begin{lemma}{\label{CSdistribution}}
+$\forall \sigma\in \Chr\s,\forall \alpha\in\mathcal{AF}(\Pi),\forall k\in\mathbb{N}:$
+\[
+|\{\Car(\sigma',\s), \sigma'\in\mathcal{CS}_\alpha(\sigma)\wedge \alpha(\chi(\Car(\sigma',\s)))=k\}|\leq 1{}.
+\]
+\end{lemma}
+
+\begin{proof}
+Let us fix some simplex $\sigma\in \Chr\s$, some agreement function $\alpha\in\mathcal{AF}(\Pi)$ and some $k\in\mathbb{N}$. Assume that there exists two subsets of $\sigma$ which are critical simplices associated with the same set consensus power $k$. Let $C_1$ and $C_2$ be the set of processes composing the critical simplices, and let $V_1$ and $V_2$ be the set of processes corresponding to their carriers.
+
+By assumption we have $V_1\neq V_2$. But by the immediacy and self-inclusion derived from immediate snapshots, we get, w.l.o.g., that $V_1\subseteq (V_2\setminus C_2)$. But according to the definition of critical simplices we have $\alpha(V_2\setminus C_2)<\alpha(V_2)=\alpha(V_1)$ --- A contradiction.
+\end{proof}
+
+\muQAg*
+
+\begin{proof}
+Let us fix some $Q\subseteq \Pi$, some simplex $\sigma\in\R_\alpha$ such that $\mathit{dim}(\sigma)=n-1$
+and some simplex $\theta\subseteq\sigma$ such that $\chi(\theta)\subseteq Q$. 
+Let $\{v_1,\dots,v_k\}$ be the vertices of $\theta$.
+W.l.o.g, assume that $\Car(v_1,\Chr\s)\subseteq\dots\subseteq \Car(v_k,\Chr\s)$.
+According to the test of $\mu_Q$ and the inclusion of the carriers, there is a $l\in\{0,\dots,k\}$,
+such that $\forall v_i, i\leq l, \mu_Q(v_i)=\gamma_Q(v_i)$ and $\forall v_i, i> l, \mu_Q(v_i)=\delta_Q(v_i)$. 
+
+Assume that $l=k$. If this is the case,
+then none of the vertices of $\theta$ are neither $\mathcal{CSM}_\alpha(v)$, nor in $\mathcal{CSV}_\alpha(v)$. Let $\theta'\subseteq\theta$ be the greatest $2$-contention simplex in $\theta$. According to the definition of $\R_\alpha$ we have $\mathit{dim}(\theta')-1\leq\mathit{Conc}_\alpha(\theta')$. 
+Thus there exists a critical set $\sigma_c$, observed by some process in $\theta'$, such that $\mathit{dim}(\theta')-1\leq\alpha(\chi(\Car(\sigma_c,\s)))$. As it is observed by some process in
+$\theta'$, and thus in $\theta$, it cannot intersect with $Q$ as otherwise this vertex would have been 
+associated to $\delta_Q$. According to carrier inclusion, this implies that the view of every process in
+$\theta$ in the first subdivision, i.e., $View^1$, is greater than $\Car(\sigma_c,\s)$.
+Therefore, $\alpha(\cup_{v\in\theta}(\mu_Q(v)))\geq {dim}(\theta')-1$. 
+By construction the selected processes return views provided by processes from themselves. Thus, according to Lemma~\ref{ContAgreement}, we obtain that 
+$|\{\mu_Q(v):v\in\theta\}|\leq \mathit{dim}(\theta')-1 \leq \alpha(\cup_{v\in\theta}(\mu_Q(v)))$
+
+Now let us assume that $l<k$, thus $c = \alpha(min(\{{\Car(\mathcal{CS}}_\alpha(\sigma)):\chi(\Car({\mathcal{CS}}_\alpha(\sigma)))\cap Q\neq\bot\})$ is well defined. 
+
+Now let us consider the processes $v_i$ such that $i\leq l$. As they do not observe a critical set, then
+$\gamma_Q$ necessarily maps to $\mathit{View}^1(v)$ with $v$ equal to some $v_i$ such that $i\leq l$.
+Let $C$ be the set of processes which return the view of a $v_i\in \mathcal{CS}_\alpha(\sigma)$.
+Let us consider the set $V$ of vertices composed of the $v_i$ such that $i> l$ and composed of $C$. For the former, $\mu_Q(v_i)$ returns a set of processes which correspond to the carrier of a critical set of $\sigma$. According to Property~\ref{muQ_validity}, it must be a set which intersects with $Q$. This is also true for the latter according to carrier self inclusion. Therefore by assumption they return the view of a critical set with an associated set consensus power greater or equal to $c$. 
+Let $|\{\mu_Q(v),v\in V\}\}|=m$. As $l<k$, we have $m>0$. Then we have a vertex $v_i, i\in\{l+1,\dots,k\}$ such that $\alpha(\mu_Q(v_i))\geq m+c-1$. Indeed, according to Lemma~\ref{CSdistribution} there is at most one carrier of a critical set associated to a given set-consensus value. Therefore if there are $m$ distinct $\delta_Q$ outputs provided, each associated to a set-consensus value greater or equal to $c$, then one is associated to a set consensus power of at least $m+c-1$. Thus $\alpha(\cup_{v\in\theta}(\mu_Q(v)))\geq m+c-1$.
+
+Let $\theta'$ be the greatest $2$-contention simplex composed of the vertices $v_i$ such that $i\leq l$
+and such that $v_i\not\in\mathcal{CS}_\alpha(\sigma)$. As they did not pass the test of $\mu_Q$, it implies that they are not in $\mathcal{CSV}_\alpha(\theta')$. Therefore, following the definition of $\R_\alpha$ we have $\mathit{dim}(\theta')-1\leq \mathit{Conc}_\alpha$. The definition implies that  $\mathit{dim}(\theta')-1$ is smaller than the set consensus power of a critical set $\sigma_c$ observed by some process of $\theta'$. As it is observed by some process in $\theta'$, and thus in $\theta$, it cannot intersect with $Q$ as otherwise this vertex would have been associated with $\delta_Q$.
+Therefore, it sees a critical set associated to a set consensus power strictly smaller than $c$. 
+The construction of the set of processes excludes $V$, the processes returning through $\gamma_Q$ a view of processes which returned $\delta_Q$. Therefore, we can apply Lemma~\ref{ContAgreement} and obtain that there is at most $\mathit{dim}(\theta')-1$
+distinct decided values by the process not in $V$. Thus at most $c-1$.
+
+Therefore there are at most $m+c-1$ distinct decided values, and hence:
+$|\{\mu_Q(v):v\in\theta\}|\leq m+c-1 \leq \alpha(\cup_{v\in\theta}(\mu_Q(v)))$.
+\end{proof}
+
+\muQRb*
+
+\begin{proof}
+This is a direct corollary of the definition of $\mu_Q$ and $\gamma_Q$, that a given vertex $v\in\R_\alpha$ does not need $Q$ to compute the result but only the processes in $Q$ it sees.
+\end{proof}
+
+\muQCons*
+
+\begin{proof}
+Let us consider a vertex $v\in\R_\alpha$,
+associated to a process of $Q$, $\chi(v)\in Q$.
+According to Property~\ref{muQ_validity}, 
+$\mu_Q$ returns to $v$ 
+a non-empty subset of processes of $Q$. 
+Thus ${\mathit{min}}_Q \circ \mu_Q(v)$ is well defined
+and returns a process in $Q$. 
+Therefore, the termination property of set consensus is satisfied
+for all processes of $Q$.
+Moreover, Property~\ref{muQ_validity} also implies that
+${\mathit{min}}_Q \circ \mu_Q(v)$ is a subset of $\Car(v,\s)$. 
+In combination with the fact that ${\mathit{min}}_Q \circ \mu_Q(v)\in Q$,
+this implies that the validity property of set consensus is satisfied
+for all processes of $Q$.
+
+Now consider any simplex $\sigma\in\sigma\in\R_\alpha$
+composed of processes of $Q$, $\chi(\sigma)\subseteq Q$.
+According to Property~\ref{muQ_agreement}, it implies that 
+the number of distinct set of processes returned by $\mu_Q$
+is smaller than or equal to $\cup_{v\in\theta}(\mu_Q(v))$. Thus
+that the number of distinct values returned by ${\mathit{min}}_Q \circ \mu_Q(v)$
+is smaller than or equal to $\cup_{v\in\theta}(\mu_Q(v))$.
+Therefore ${\mathit{min}}_Q \circ \mu_Q$ also satisfies the 
+agreement property of $\cup_{v\in\theta}(\mu_Q(v))$-set consensus.
+\end{proof}
+
+\alphaPSC*
+
+\begin{proof}
+According to Property~\ref{muQ_set-consensus} $f_A\circ \mu_A$ 
+returns a valid set consensus proposal. 
+Assume that the protocol does not terminate for some processes
+in $A$. This implies that there is a process in $A$ which
+is not participating yet. This contradicts the assumption 
+that there is a process with the smallest view in 
+$A$ in some iteration which participates.
+
+Consider the first round at which some process returns.
+As views are inclusion-closed and as the process terminating
+must have observed all the processes of $A$ in its view participating,
+then every process saw some process in $A$ participating.
+Therefore every process adopts a new proposal, which is
+$f_A\circ \mu_A(v)$ with $v$ the process associated vertex.
+According to Property~\ref{muQ_set-consensus}, we have for all
+subset $Q$ of $A$ associated to the simplex $\sigma$ at most 
+$\alpha(\cup_{v\in\sigma}(\mu_Q(v)))$ distinct returned
+values. But before returning a value, a process 
+writes the input state of every process in its $\mu_Q$
+output. Therefore the participating set is greater than 
+$\cup_{v\in\sigma} \mu_Q(v))$ when $\alpha(\cup_{v\in\sigma}(\mu_Q(v)))$
+distinct outputs are returned. Therefore the algorithm 
+solves an $\alpha$-adaptive set consensus.
+\end{proof}
+
+\MemSCcombined*
+
+\begin{proof}
+Assume that eventually the simulation only completes dummy writes. This
+means that there is a process which infinitely often completes itself 
+dummy writes. Thus this process is infinitely often provided with
+the smallest view of $\R_\alpha$ without completing its pending 
+set consensus operation. According to Lemma~\ref{AgreementProgress},
+every process must have eventually returned --- a contradiction.
+\end{proof}
+
+\end{document}
