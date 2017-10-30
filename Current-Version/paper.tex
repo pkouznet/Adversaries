@@ -102,6 +102,11 @@
 %\newcounter{linenumber}
 \newenvironment{algorithmfig}{\hrule\vskip 3mm}{ \vskip 3mm \hrule }
 
+\newcommand{\remove}[1]{}
+\newcommand{\ignore}[1]{}
+
+
+
 
 \def\P{\ensuremath{\mathcal{P}}}
 \def\DP{\ensuremath{\Diamond\mathcal{P}}}
@@ -171,7 +176,6 @@
 \newcommand{\false}{\mathit{false}}
 \newcommand{\stable}{\mathit{Stable}}
 \newcommand{\setcon}{\mathit{setcon}}
-\newcommand{\remove}[1]{}
 %\newtheorem{observation}[theorem]{Observation}
 
 \def\s {\mathbf{s}}
@@ -234,7 +238,6 @@
 %\newcommand{\res}[1]{\mbox{\textbf{#1}}}% reserved words
 
 %% Text to skip
-\newcommand{\ignore}[1]{}
 
 %% Adding notes (in bold) 
 \newcommand{\pknote}[1]{\textbf{PK: #1}}
@@ -392,17 +395,28 @@ current iteration as the input value of the next one, we obtain the
   \label{Fig:scs}
 \end{figure}
 
+The topological characterization of Herlihy
+and Shavit~\cite{HS99} gives rise to the Asynchronous Computability
+Theorem:
 
+\begin{quote}
+A task $T=(\I,\O,\Delta)$, where $\I$ is the input complex, $\O$ is an
+output complex, and $\Delta$ is a carrier map from $\I$ to sub-complexes of
+$\O$, is wait-free solvable 
+if and only if there exists a natural number $\ell$ and a simplicial map
+$\phi: \Chr^{\ell}(\I) \rightarrow \O$ carried by $\Delta$
+(informally, respecting the task specification $\Delta$).
+\end{quote}
 
-Thus, the topological characterization of Herlihy
-and Shavit~\cite{HS99} can be interpreted as:
-the set of wait-free solvable task is precisely the set of tasks
+The theorem can be interpreted as: the set of wait-free solvable task is precisely the set of tasks
 solvable in the IIS model. 
-The ability of (iteratively) solving the IS task allows us
+Thus, the ability of (iteratively) solving the IS task allows us
 to solve any task in the wait-free model.
 Hence, from the task computability perspective, the IS task is a finite (or, as we
 explain below,  \emph{compact}) representation of the
 wait-free model.  
+
+
 
 \myparagraph{Adversaries.}
 %
@@ -413,8 +427,9 @@ is defined through a collection $\A$ of process subsets, called \emph{live sets}
 requires that, in every run of the corresponding \emph{adversarial $\A$-model}, the set of
 processes taking infinitely many steps must be a live set.
 
+
 %[[PK rather to the related work? 
-\remove{
+\ignore{
 The underlying structure of the live sets of a given adversary $\A$ 
 determines its power in solving \emph{colorless} distributed
 tasks\footnote{Intuitively, colorless tasks %~\cite{BG93b,BGLR01}
@@ -502,19 +517,33 @@ of  $t$-resilience.
 
 \myparagraph{Compact topology of fair adversaries.}
 In this paper, we present a compact topological characterization
-of the large class of \emph{\fair} adversarial models~\cite{KR17}
-that subsumes the models of wait-freedom and $t$-resilience. 
+of the large class of \emph{\fair} adversarial models~\cite{KR17}.
+%that subsumes the models of wait-freedom and $t$-resilience. 
+Informally, a {\fair} adversary does not allow a \emph{subset} of
+processes participating in a computation to achieve a better 
+set consensus than the whole set of participants.
+%
+%
+The class of {\fair} adversaries includes \emph{superset-closed}~\cite{Kuz12}
+and \emph{symmetric}~\cite{Tau10}.
+%
+In particular, the $t$-resilient adversary is both superset-closed and
+symmetric, and the \emph{$k$-obstruction free} adversary, recently
+characterized in a compact way~\cite{GHKR16}, is symmetric.  
+
+
+
 %of a
 %a large class of adversaries that includes superset-closed ones.
 %
 We show that a specific task
-$\R_{\A}$ captures the task computability of an adversary $\A$.  
-Informally, the task consists in solving chromatic simplex
+$\R_{\A}$ captures the task computability of a fair adversary $\A$.  
+The task consists in solving chromatic simplex
 agreement~\cite{BG97,HS99} on a specific \emph{subcomplex} of the second
 iteration of the standard chromatic  subdivision.
-Such a tasks is called \emph{affine}~\cite{GKM14-podc,GHKR16}, as
-the geometrical representation of its output complex is
-a union of affine spaces (see, e.g., Figure~\ref{Fig:scs}(b)).  
+Such tasks are called \emph{affine}~\cite{GKM14-podc,GHKR16}, as
+the geometrical representations of their output complexes are
+unions of affine spaces (see, e.g., Figure~\ref{Fig:scs}(b)).  
 
 %We show that the affine task $\R_{\A}$ capturing the
 %$k$-set-consensus%
@@ -525,6 +554,8 @@ a union of affine spaces (see, e.g., Figure~\ref{Fig:scs}(b)).
 
 %\myparagraph{Agreement functions and {\fair} adversaries.}
 %
+%[[PK unclear and unnecessary
+\remove{ 
 Our characterization is expressed in an abstract way via
 \emph{agreement functions}~\cite{KR17}.
 %
@@ -539,21 +570,11 @@ any adversary~\cite{GK10,KR17}.
 It turns out that agreement functions encode enough information to
 characterize the task computability of any {\fair}
 adversary~\cite{KR17}.
+}
 %
-Informally, a {\fair} adversary does not allow a \emph{subset} of
-processes participating in a computation to achieve a better 
-set consensus than the whole set of participants.
-%
-%
-The class of {\fair} adversaries includes \emph{superset-closed}~\cite{Kuz12}
-and \emph{symmetric}~\cite{Tau10}.
-%
-In particular, the $t$-resilient adversary is both superset-closed and
-symmetric, and the \emph{$k$-obstruction free} adversary, recently
-characterized in a compact way~\cite{GHKR16}, is symmetric.  
 
 %[[PK too technical: to the preliminaries?
-\remove{
+\ignore{
 Symmetric adversaries (or \emph{symmetric progress
   conditions} introduced by Taubenfeld. 
 %
@@ -574,12 +595,9 @@ sets of  sizes from $1$ to $k$.
 Our characterization can then be put as a generalization of the
 celebrated Asynchronous Computability Theorem (ACT) by Herlihy and Shavit~\cite{HS99}:
 \begin{quote}
-A task $T=(\I,\O,\Delta)$, where $\I$ is the input complex, $\O$ is an
-output complex, and $\Delta$ is a map from $\I$ to sub-complexes of
-$\O$, is solvable in a fair adversarial $\A$-model
+A task $T=(\I,\O,\Delta)$ is solvable in a fair adversarial $\A$-model
 if and only if there exists a natural number $\ell$ and a simplicial map
-$\phi: \R_{\A}^{\ell}(\I) \rightarrow \O$ carried by $\Delta$
-(informally, respecting the task specification $\Delta$).
+$\phi: \R_{\A}^{\ell}(\I) \rightarrow \O$ carried by $\Delta$.
 \end{quote}
 
 This result generalizes all topological characterizations of
@@ -708,7 +726,7 @@ Note that in an infinite run, every correct process is participating.
 %states of participating processes are eventually known to every 
 %process that takes sufficiently many steps.
 
-\remove{
+\ignore{
 In contrast, the IIS model does not have the notion of a faulty 
 process. Instead, a process may appear 
 ``slow''~\cite{RS12,Gaf98-iis,BGK14}, i.e., be late in accessing 
@@ -739,7 +757,7 @@ prefix $R$ of the run where: (1)~decided values form a
 vector $O\in\O$ such that $(I,O)\in\Delta$, and (2)~all 
 correct processes decide. 
 
-\remove{
+\ignore{
 \myparagraph{$k$-set-consensus and $k$-concurrency models.}
 %
 A $k$-set-consensus object 
