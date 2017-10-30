@@ -735,6 +735,11 @@ An input~$\bot$  denotes a \emph{non-participating} process and an output
 value~$\bot$ denotes an \emph{undecided} process. 
 Check~\cite{HKR14} for more details on the definition.
 
+In the task of \emph{$k$-set consensus}~\cite{Cha90}, input values are in a set of values $V$ ($|V|\geq k+1$), output values
+are in $V$, and for each input vector $I$ and output vector $O$, $(I,O) \in\Delta$ if the set of non-$\bot$
+values in $O$ is a subset of values in $I$ of size at most $k$.
+The special case of $1$-set consensus is called \emph{consensus}~\cite{FLP85}. 
+
 A protocol solves a task $T=(\I,\O,\Delta)$ in a model $M$, 
 if it ensures that in every infinite run of~$M$ in which 
 processes start with an input vector $I\in\I$, there is a finite
@@ -850,34 +855,36 @@ $\A$-compliant runs.
 
 %\begin{definition}[Agreement function]~\cite{KR17}
 %  \label{def:agr}
-Consider  an
-adversary $\A$ and a function $\alpha_{\A}: 2^{\Pi} \to \{0,\ldots,n\}$. 
-We say that $\alpha$ is an \emph{agreement function} of $\A$-model if
+Consider  an adversary $\A$ and a function $\alpha: 2^{\Pi} \to \{0,\ldots,n\}$. 
+We say that $\alpha$ is the \emph{agreement function} of $\A$-model if
 for each $P\in 2^{\Pi}$, in the set of runs of $\A$ in which no process
 in $\Pi\setminus P$ participates,
-$\alpha_{\A}(P)$-set consensus can be solved,  but $(\alpha_{\A}(P)-1)$-set consensus cannot.
-Intuitively, $\alpha_A(P)$ is the best level of set consensus that
-can be reached when only processes in $P$ are allowed participate.
-By convention, if $P$ does not contain a live set, we set $\alpha_\A(P)=0$.
+$\alpha(P)$-set consensus can be solved,  but $(\alpha(P)-1)$-set consensus cannot~\cite{KR17}.
+Intuitively, $\alpha(P)$ is the best level of set consensus that
+can be reached when only processes in $P$ are allowed to participate.
+By convention, if $P$ does not contain a live set, we set
+$\alpha_\A(P)=0$.
+Note that for any adversary $\A$, its  agreement function $\alpha_{\A}$ is \emph{monotonic}:
+$P\subseteq P'$ $\Rightarrow$ $\alpha_{\A}(P)\leq \alpha_{\A}(P')$. 
 
-An \emph{$\alpha$-adaptive set consensus} is 
-an abstraction solving a set consensus protocol  
-such that at the time $k$ distinct output values are returned
-the participating set $P$ is such that $\alpha(P)\geq k$: 
-the abstraction takes a value as an input, 
-returns a proposed value as an output,  and ensures that at the
-time when $k$ distinct output has been returned at least
-$P$ processes, with $\alpha(P)\geq k$, are currently participating.   
+The \emph{$\alpha$-adaptive set consensus} abstraction~\cite{KR17}
+can be accessed with a \textit{propose}$(v)$ operation, where $v \in V$, and ensures
+that (termination) every operation invoked by a correct process
+eventually returns, (validity) every returned value is the argument of a
+preceding \textit{propose} invocation, and ($\alpha$-agreement) at any
+point of the execution, the number of distinct returned values does not exceed
+$\alpha(P)$, where $P$ is the set of processes that took at least one step
+up to that point.     
 
-Let $\mathcal{AF}(\Pi)$ be the set of all agreement functions 
-corresponding to some adversarial model in $\Pi$. 
-For all $\alpha\in\mathcal{AF}(\Pi)$, we can define a natural model
-derived from the agreement function as follows:
+%Let $\mathcal{AF}(\Pi)$ be the set of all monotonic functions $\alpha: 2^{\Pi} \to \{0,\ldots,n\}$.
+For any monotonic function $\alpha: 2^{\Pi} \to \{0,\ldots,n\}$, we
+can define a natural model (a subset of AS runs) as follows:
 \begin{definition}[$\alpha$-model] 
-  The \emph{$\alpha$-model} is the set of
+  The \emph{$\alpha$-model} is the set of infinite
   %\emph{$\alpha$-adaptive active-resilient} runs, i.e., all
-  runs in which, assuming that the participating set is $P$,
-  $\alpha(P)\geq 1$ and  at most $\alpha(P)-1$ participating processes are faulty.
+ runs satisfying the following property: if $P$ is the 
+ participating set, then $\alpha(P)\geq 1$ and  at most $\alpha(P)-1$
+ processes in $P$ are faulty.
 %Note that this implies that there is no run of the $\alpha$-model where the participating set $P$ is such that $\alpha(P)=0$.
 \end{definition}
 
@@ -891,18 +898,18 @@ derived from the agreement function as follows:
 An adversary is \emph{superset-closed}~\cite{Kuz12} if each superset of a set of an
 element of $\A$ is also an element of $\A$, i.e.,
 $\forall S\in \A$, $\forall S'\subseteq \Pi$, $S\subseteq S'$: $S'\in\A$. 
-Superset-closed adversaries provide an interesting non-uniform
-generalization of the classical $t$-resilience condition~\cite{HR10}:
-e.g., the \emph{$t$-resilient} adversary in a
-system of $n$ processes consists of all sets of $n-t$ or more processes.
-
+%Superset-closed adversaries provide an interesting non-uniform
+%generalization of the classical $t$-resilience condition~\cite{HR10}:
+%e.g., the \emph{$t$-resilient} adversary in a
+%system of $n$ processes consists of all sets of $n-t$ or more processes.
 %
-
+%
+%
 %[[PK
 %Note that the agreement function of a generic adversary $\A$ is
 %defined $\setcon(A|P)$~\cite{GK11}. 
 %]]
-
+%
 An adversary $\A$ is \emph{symmetric} if it does not depend on process
 identifiers and thus only on the size of live sets: 
 $\forall S \in \A$, $\forall S' \subseteq \Pi$, $|S'|=|S|\implies S'\in\A$.
@@ -915,29 +922,32 @@ $\forall S \in \A$, $\forall S' \subseteq \Pi$, $|S'|=|S|\implies S'\in\A$.
 %
 %\begin{theorem}%~\cite{HR10,GK10}
 %  \label{lem:sc-sym}
-For  $P\in 2^{\Pi}$, let $\A|_P$ denote the set of all elements of
-$\A$ that are subsets of $P$, and $\HSS(\A|_P)$ denote the size of the
-minimal hitting set in $\A|_P$, i.e., the minimal subset of $P$ that
+For  $P\in 2^{\Pi}$, let $\A|_P=\{S|S\in\A,S\subseteq P\}$
+%denote the set of all elements of
+%$\A$ that are subsets of $P$,
+and $\HSS(\A|_P)$ denote the size of the \emph{minimal hitting set} of $\A|_P$, i.e., the minimal subset of $P$ that
 intersects with each element in $\A|_P$.  
-It is shown in~\cite{GK10} that the smallest $k$ such that $\A$ 
-can solve $k$-set consensus can be computed using a function $\setcon(\A)$,
-and thus that $\alpha_{\A}(P)=\setcon(\A|_P)$.
-For any superset-closed adversary~$\A$, we have
-$\alpha_{\A}(P) = \setcon(\A|_P) = \HSS(\A|_P)$.
-Moreover, for any symmetric adversary $\A$, we have
-$\alpha_{\A}(P)= \setcon(\A|_P) = |\{k\in\{1,\ldots,|P|\}: \exists S \in \A, |S|=k\}|$~\cite{GK10}.
+%that the smallest $k$ such that $\A$ 
+%can solve $k$-set consensus can be computed using a function $\setcon(\A)$,
+%and thus
+it is shown in~\cite{KR17} that $\alpha_{\A}(P)$ can be computed using the
+\emph{set consensus} function $\setcon$~\cite{GK10}:  $\alpha_{\A}(P)=\setcon(\A|_P)$.
+Moreover, for any superset-closed adversary~$\A$, we have
+$\alpha_{\A}(P) = \setcon(\A|_P) = \HSS(\A|_P)$ and for any symmetric adversary $\A$, we have
+$\alpha_{\A}(P)= \setcon(\A|_P) = |\{k\in\{1,\ldots,|P|\}: \exists S \in \A, |S|=k\}|$.
 %\end{theorem}
 
 \myparagraph{Fair adversaries.}
 %
 Informally, an adversary is \emph{{\fair}}~\cite{KR17} if a subset $Q$ of
 participating processes $P$ cannot achieve better set consensus than the
-whole set of participants (unless $|Q|$ is smaller than~$\alpha_{\A}(P)$).
-The set consensus power of a subset $Q$ of the participating processes $P$
-corresponds to the set consensus power of the adversary 
-$\A|_{P,Q} = \{S\in\A:(S\subseteq P)\wedge(S\cap Q\neq\emptyset)\}.$
+whole set of participants. % (unless $|Q|$ is smaller than~$\alpha_{\A}(P)$).
+%The set consensus power of a subset $Q$ of the participating processes $P$
+%corresponds to the set consensus power of the adversary 
+More precisely, for an adversary $\A$, and $Q\subseteq P$, we define 
+$\A|_{P,Q} = \{S\in\A:(S\subseteq P)\wedge(S\cap Q\neq\emptyset)\}$.
 %\begin{definition}\label{def:fair}[{\Fair} adversary]
-Therefore, an adversary $\A$ is {\fair} if and only if:
+Then $\A$ is {\fair} if and only if:
 \[\forall P \subseteq \Pi, \forall Q\subseteq P, \setcon(\A|_{P,Q})= min(|Q|,\setcon(\A|_P)){}.\]
 %\end{definition}
 
@@ -947,7 +957,7 @@ Superset-closed and symmetric adversaries are fair~\cite{KR17}.
 %adversaries:
 It turns out that the task computability of a fair adversary is
 captured precisely by the $\alpha_\A$-model, i.e.,
-they both solve \emph{the same} set of tasks
+they solve \emph{the same} set of tasks
 (we say that the models are \emph{equivalent}).
 
 \begin{theorem}~\cite{KR17}
@@ -956,8 +966,8 @@ For any {\fair} adversary $\A$, a task is solvable in the adversarial
 $\A$-model if and only if it is solvable in the $\alpha_\A$-model. % are equivalent regarding task solvability.
 \end{theorem} 
 %
-
-Theorem~\ref{th:adv:task} was proved using the following result, which
+%
+Theorem~\ref{th:adv:task} is proved using the following result, which
 will be instrumental for us too:
 \begin{theorem}~\cite{KR17}
 \label{read/writeAndConsensus}
