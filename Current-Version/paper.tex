@@ -258,7 +258,7 @@
 %\title{Compact Topology of Shared-Memory Adversaries}
 \title{Asynchronous Computability Theorem for Fair Adversaries}
 %\titlerunning{Compact Topology of Shared-Memory Adversaries}
-running{Compact Topology of Shared-Memory Adversaries}
+%\running{Compact Topology of Shared-Memory Adversaries}
 
 \author[1]{Petr Kuznetsov}
 \author[1]{Thibault Rieutord}
@@ -284,15 +284,15 @@ running{Compact Topology of Shared-Memory Adversaries}
 \maketitle
 \begin{abstract}
 The paper proposes a simple topological characterization of
-a large class of \emph{adversarial} distributed-computing models via  
+a large class of fair  adversarial distributed-computing models via  
 \emph{affine tasks}: sub-complexes of the second
 iteration of the standard chromatic subdivision.
 We show that the task computability of a model in the class is precisely captured by
 iterations of the corresponding affine task. 
 %An important advantage of this characterization is that,
-While an adversary is in general defined as a \emph{non-compact} set of 
-infinite runs, its affine task  is just a finite subset of runs of the
-$2$-round iterated immediate snapshot model.
+%While an adversary is in general defined as a \emph{non-compact} set of 
+%infinite runs, its affine task  is just a finite subset of runs of the
+%$2$-round iterated immediate snapshot model.
 %
 Our results generalize and improve all previously derived
 topological characterizations of distributed-computing models. 
@@ -325,11 +325,6 @@ topological characterizations of distributed-computing models.
 
 \section{Introduction}
 
-\myparagraph{Compact topology of wait-freedom.}
-%Devising algorithms that maintain consistency in the
-%presence of failures and in the absence of synchrony assumptions is a
-%major challenge in distributed computing. 
-%
 Distributed computing is a jungle of models, parameterized by 
 types of failures, synchrony assumptions, and employed communication
 primitives.
@@ -337,19 +332,19 @@ Determining relative computability power of these models (``is model
 $A$ more powerful than model $B$'') is an intriguing and important
 problem.
 
-In this paper, we deal with a large class of \emph{shared-memory} models in which a set of
+This paper deals with a large class of \emph{shared-memory} models in which a set of
 \emph{crash-prone} \emph{asynchronous} processes communicate
 via invoking operations on a
 collection of shared objects. By default, we assume that the shared objects include 
 atomic read-write registers.  
 
 
-The \emph{wait-free} model of computation~\cite{Her91} 
-makes no assumptions about the number of failures that can occur, 
-so no correct process can be prevented from making progress.
+\myparagraph{Topology of wait-freedom.} The \emph{wait-free} model of computation~\cite{Her91} 
+makes no assumptions on the processes that can crash. 
+%so no correct process can be prevented from making progress.
 %
 Herlihy and Shavit proposed an elegant 
-characterization of wait-free task computability through the
+characterization of wait-free (read-write) task computability through the
 existence of a specific continuous map from geometrical
 structures describing inputs and outputs of a given
 task~\cite{HS99}.
@@ -365,8 +360,8 @@ In particular, we can choose this subdivision to be the iterated
 (Figure~\ref{Fig:scs}(a)).
 The subdivision precisely captures the output complex of the
 \emph{immediate snapshot} (IS) task~\cite{BG97}.
-By solving the IS task iteratively, proposing the view obtained in the
-current iteration as the input value of the next one, we obtain the
+By solving the IS task iteratively, where the view obtained in the
+current iteration is used as the input value for the next one, we obtain the
 \emph{iterated} immediate snapshot (IIS) model.
 
 %\begin{wrapfigure}{r}{0.45\textwidth}
@@ -381,17 +376,17 @@ current iteration as the input value of the next one, we obtain the
   \begin{minipage}[b]{.49\linewidth}
     \centering
 \includegraphics[scale=0.45]{Figures/scs_other.pdf}
-   \subcaption{\footnotesize{$\Chr^1(\s)$, equivalent to the output complex of the IS task.}}
+   \subcaption{\footnotesize{$\Chr^1(\s)$, the output complex of IS}}
   \end{minipage}
   \hfill
   \begin{minipage}[b]{.49\linewidth}
     \begin{center}
 \includegraphics[scale=0.5]{Figures/1-res.pdf}
-     \subcaption{\footnotesize{$T_1$, the task corresponding to $1$-resilience.}}
+     \subcaption{\footnotesize{$T_1$, the affine task of $1$-resilience
+     }}
     \end{center}
   \end{minipage}
-  \caption{\small{Examples of subsets of iterated standard chromatic subdivisions of
-  $\s$ in dimension $2$.}}
+  \caption{\small{Subsets of the iterated standard chromatic subdivision}}
   \label{Fig:scs}
 \end{figure}
 
@@ -482,13 +477,16 @@ of all live sets of size $n-t$ or more.
 %: any set of size $t+1$ processes intersects
 %with every live set.
 %
+%
 Notice that, assuming the conventional ``longest-prefix''
-metric~\cite{AS85}, the model is \emph{non-compact}.
-Indeed, all finite prefixes of an infinite run can be in the model,
+metric~\cite{AS85}, the model is \emph{non-compact}, in particular, it
+does not contain its limit points.
+All finite prefixes of an infinite run can be in the model,
 even though the run (the infinite limit of the sequence of its
 ever-extending finite prefixes) is not.
 Consider, for example, an infinite ``solo'' run in which exactly one
 process takes steps in a $1$-resilient system of three processes.    
+
 
 %\begin{wrapfigure}{r}{0.45\textwidth}
 %\center
@@ -504,7 +502,8 @@ task: the output complex of the task is a subcomplex consisting of
 \emph{all} simplices of the second degree of the standard chromatic
 subdivision of the task's input complex, except the simplices 
 adjacent to the $(n-t-1)$-skeleton of the input
-complex (Figure~\ref{Fig:scs}(b)).
+complex (Figure~\ref{Fig:scs}(b) describes the $1$-resilient
+$3$-process case).
 
 Solving a %\emph{any} (not necessarily colorless)
 task $T$ in the  $t$-resilient model is then equivalent to finding a map from
@@ -515,34 +514,20 @@ Therefore, $T_t$ is a compact representation of a (non-compact) model
 of  $t$-resilience. 
 
 
-\myparagraph{Compact topology of fair adversaries.}
+\myparagraph{Topology of fair adversaries.}
 In this paper, we present a compact topological characterization
-of the large class of \emph{\fair} adversarial models~\cite{KR17}.
-%that subsumes the models of wait-freedom and $t$-resilience. 
-Informally, a {\fair} adversary does not allow a \emph{subset} of
-processes participating in a computation to achieve a better 
-set consensus than the whole set of participants.
-%
-%
-The class of {\fair} adversaries includes \emph{superset-closed}~\cite{Kuz12}
-and \emph{symmetric}~\cite{Tau10}.
-%
-In particular, the $t$-resilient adversary is both superset-closed and
-symmetric, and the \emph{$k$-obstruction free} adversary, recently
-characterized in a compact way~\cite{GHKR16}, is symmetric.  
-
-
-
+of the large class of \emph{\fair} adversarial models~\cite{KR17}
+that subsumes the models of wait-freedom and $t$-resilience. 
 %of a
 %a large class of adversaries that includes superset-closed ones.
 %
 We show that a specific task
-$\R_{\A}$ captures the task computability of a fair adversary $\A$.  
+$\R_{\A}$ captures the task computability of an adversary $\A$.  
 The task consists in solving chromatic simplex
 agreement~\cite{BG97,HS99} on a specific \emph{subcomplex} of the second
 iteration of the standard chromatic  subdivision.
 Such tasks are called \emph{affine}~\cite{GKM14-podc,GHKR16}, as
-the geometrical representations of their output complexes are
+the geometrical representation of their output complexes are
 unions of affine spaces (see, e.g., Figure~\ref{Fig:scs}(b)).  
 
 %We show that the affine task $\R_{\A}$ capturing the
@@ -642,9 +627,6 @@ optional appendix.
 
 
 
-
-
-
 %======================
 \section{Preliminaries}
 \label{sec:model}
@@ -658,11 +640,11 @@ $p_1,\ldots,p_n$. We consider two models of communication:
 \myparagraph{Communication models.}
 %
 The atomic-snapshot (AS) memory is represented as a vector of 
-shared variables, where processes are associated to distinct 
-vector positions, and it exports two operations: \emph{update} and 
+shared variables, where each process $p_i$ is associated with a distinct 
+position $i$. The memory can be accessed with two operations: \emph{update} and 
 \emph{snapshot}. An \emph{update} operation performed by $p_i$ 
-replaces the shared variable at position $i$ with a new value 
-and a \emph{snapshot} returns the current state of the vector. 
+modifies the value at position $i$ 
+and a \emph{snapshot} returns the current state of the memory.
 %The model in which processes only have access to an AS memory is 
 %called the AS model.
 
@@ -681,7 +663,7 @@ properties are satisfied: (self-inclusion)~$v_i \in V_{ir}$;
 (immediacy)~$v_i \in V_{jr}$ $\Rightarrow$ $V_{ir}\subseteq V_{jr}$. 
 
 
-\myparagraph{Protocols and runs.}
+\myparagraph{Protocols, runs and models.}
 %
 A \emph{protocol} here is a deterministic  distributed automaton that, for each 
 local state of a process, stipulates which operation and which 
@@ -689,17 +671,18 @@ state transition the process is allowed to perform.
 %We assume here \emph{deterministic} protocols, and
 %where only 
 %one operation and state transition is allowed in each state. A 
-a \emph{run} of a protocol is defined as a possibly infinite 
+A \emph{run} of a protocol is defined as a possibly infinite 
 sequence of alternating states and operations.
-
+A \emph{model} is a set of runs.
 %
+
 In the IIS communication model, we assume that processes run the 
 \emph{full-information} protocol: the first value each process 
 writes is its \emph{initial state}. For each $r>1$, the outcome of 
 the immediate snapshot operation on memory $M_{r-1}$ is 
 submitted as the input value for the immediate snapshot 
-operation on memory~$M_r$. After a certain number of such 
-(asynchronous) rounds, a process may gather enough information 
+operation on memory~$M_r$. After a certain number of iterations,
+a process may gather enough information 
 to produce an irrevocable \emph{output} value.
 %, i.e., to produce an irrevocable non-$\bot$ 
 %output value. A \emph{run} of the IIS communication model is 
@@ -717,7 +700,7 @@ a process that takes only  finitely many steps
 is called \emph{faulty}, otherwise it is called 
 \emph{correct}. We assume that in its first step, a process 
 writes its initial state in the shared memory using the \emph{update} operation. If a process 
-completed this first step in a given run it is said to be
+completed this first step in a given run, it is said to be
 \emph{participating}, and the set of participating processes is called
 the \emph{participating set}.
 Note that in an infinite run, every correct process is participating.
@@ -726,7 +709,7 @@ Note that in an infinite run, every correct process is participating.
 %states of participating processes are eventually known to every 
 %process that takes sufficiently many steps.
 
-\ignore{
+\remove{
 In contrast, the IIS model does not have the notion of a faulty 
 process. Instead, a process may appear 
 ``slow''~\cite{RS12,Gaf98-iis,BGK14}, i.e., be late in accessing 
@@ -745,54 +728,25 @@ Formally, a \emph{task} is defined through a set~$\I$ of input
 vectors (one input value for each process), a set~$\O$ of output 
 vectors (one output value for each process), and a total 
 relation~$\Delta:\I\mapsto 2^{\O}$ that associates each input 
-vector with a set of possible output vectors. An input~$\bot$ 
-denotes a \emph{non-participating} process and an output 
+vector with a set of possible output vectors.
+We require that $\Delta$ is a \emph{carrier} map: $\forall \tau,\sigma
+\in \I$, $\tau\subset\sigma$: $\Delta(\tau)\subseteq \Delta(\sigma)$.  
+An input~$\bot$  denotes a \emph{non-participating} process and an output 
 value~$\bot$ denotes an \emph{undecided} process. 
 Check~\cite{HKR14} for more details on the definition.
 
 A protocol solves a task $T=(\I,\O,\Delta)$ in a model $M$, 
 if it ensures that in every infinite run of~$M$ in which 
 processes start with an input vector $I\in\I$, there is a finite
-prefix $R$ of the run where: (1)~decided values form a 
+prefix $R$ of the run in which: (1)~decided values form a 
 vector $O\in\O$ such that $(I,O)\in\Delta$, and (2)~all 
 correct processes decide. 
-
-\ignore{
-\myparagraph{$k$-set-consensus and $k$-concurrency models.}
-%
-A $k$-set-consensus object 
-can be accessed with a \emph{propose} operation
-that takes a \emph{proposed} value as an argument and returns a
-\emph{decided} value as a response, so that, in each run,  decided
-values constitute a subset of proposed values of size at most $k$.   
-For $k\in\{1,\ldots,n-1\}$, in the \emph{$k$-set-consensus model}, processes communicate via the
-AS memory and $k$-ste-consensus objects. 
-
-Let $R$ be a finite run of the AS model.
-A process $p_i$ is called \emph{active at the end of $R$} 
-if $p_i$ participates in $R$ but has not terminated by the end of $R$. 
-Let $\textit{active}(R)$ denote the set of all processes that 
-are active at the end of $R$.
-
-A run $R$ of the AS model is \emph{$k$-concurrent} ($k=1,\ldots,n$) if at most 
-$k$ processes are \emph{concurrently active} in $R$, i.e., 
-$\max\{|\textit{active}(R')|;\; R' \textrm{ prefix of } R\}\leq k$. 
-The \emph{$k$-concurrency} model is the set of $k$-concurrent 
-runs of the AS model.
-
-It is known that the $k$-concurrency model is \emph{equivalent} 
-to the $k$-set-consensus model~\cite{GG09}\footnote{In fact, 
-this paper contains a self-contained proof of this equivalence 
-result.}: any task that can be solved $k$-concurrently can also 
-be solved in the $k$-set-consensus model, and vice versa.
-}
 
 \myparagraph{Standard chromatic subdivision and IIS.}
 %
 We use the standard language of \emph{simplicial
   complexes}~\cite{Spanier,HKR14} to give a combinatorial
-representation of the IIS model. See Appendix~\ref{app:topprimer} for
-missing details.
+representation of the IIS model. 
 A \emph{simplicial complex} is defined as a set of 
 \emph{vertices} and an inclusion-closed set of vertex subsets, 
 called \emph{simplices}. The dimension of a simplex is 
@@ -811,9 +765,11 @@ A simplicial complex is \emph{chromatic} if it is equipped with
 a \emph{coloring function}---a non-collapsing simplicial map $\chi$ from its vertices to 
 the {\em standard $(n-1)$-simplex}~$\s$ of $n$ vertices, in 
 one-to-one correspondence with $n$ {\em colors} $1,2, \dots, n$. 
-With some abuse of notation, processes may be referred to 
-by their identifiers and~$\chi$ used to obtain 
-the set of processes associated to a simplex.
+%[[PK unnecessary?
+%With some abuse of notation, processes may be referred to 
+%by their identifiers and~$\chi$ used to obtain 
+%the set of processes associated to a simplex.
+%]]
 %
 %Refer to the extended version of this paper~\cite{GHKR16TR} or~\cite{HKR14} for more details on the 
 %formalism.
@@ -826,7 +782,7 @@ $(v_1,\sigma_1)$,~$\ldots$,~$(v_m,\sigma_m)$  satisfying the
 properties of immediate snapshot. 
 %
 $\Chr\s$ is indeed a \emph{subdivision} of $\s$: in particular, 
-it is homeomorphic to $|\s|$, the geometric realization of $\s$~\cite{Koz12}.
+its geometric realization is homeomorphic to $|\s|$, the geometric realization of $\s$~\cite{Koz12}.
 %
 If we \emph{iterate} this subdivision~$m$ times, each time 
 applying $\Chr$ to each of the simplices, we 
@@ -836,45 +792,31 @@ $\Chr^m \s$ precisely captures  the $m$-round
 
 The \emph{carrier} of simplex $\sigma\in\Chr^m\s$ relatively to $\Chr^{m'}\s$, 
 with $m'<m$, which we denote as~$\Car(\sigma,\Chr^{m'}\s)$ is 
-the smallest simplex $\sigma'\in\Chr^{m'}\s$ such that in the geometric 
+the smallest simplex $\sigma'\in\Chr^{m'}\s$ such that the geometric 
 realization of $\sigma$, $|\sigma|$, is included in $|\sigma'|$. 
-Intuitively, for a vertex $v$ in $\Chr^m\s$, 
+For example, for a vertex $v$ in $\Chr^m\s$, 
 $\Car(v,\Chr^m\s)$ is the set of all processes \emph{seen} by 
 the process~$\chi(v)$ in the corresponding run of IS$^m$.
 %possibly through the views of other processes: it 
 %See Appendix~\ref{app:topprimer} for more details.
-
-\remove{
-Each 
-run of~IS$^m$ corresponds to a simplex in~$\Chr^m \s$. Every 
-vertex~$v$ of~$\Chr^m \s$ is thus defined 
-as~$(p,\IS^1(p,\sigma),\ldots,\IS^m(p,\sigma))$, where 
-each~$\IS^i(p,\sigma)$ is interpreted as the set of processes 
-appearing in the~$i^{th}$ IS iteration obtained by~$p$ in the 
-corresponding~$\IS^m$ run. The \emph{carrier} of vertex~$v$ is 
-then defined as the set of all processes seen by~$p$ in this run, 
-possibly through the views of other processes: it is the 
-smallest face of~$\s$ that contains~$v$ in its geometric 
-realization. The carrier of a simplex is the maximal carrier 
-of its vertices (related by inclusion). 
-}
-
+(See Appendix~\ref{app:topprimer} for missing details.)
 
 \myparagraph{Simplex agreement and affine tasks.}
 %As we show in this paper, the class of fair adversaries can be captured by an iterated 
 %\emph{affine} task~\cite{GKM14-podc}.
 In a general simplex agreement task, every process is given, as an
-input, a vertex of its color in thr standard simplex $\s$, and is
+input, a vertex of its color in the standard simplex $\s$, and is
 expected to output a vertex of $\C$ of its color, so that the outputs
-form a simplex of $\C$.   
+form a simplex of $\C$ respecting the inputs.   
 In the instances of simplex agreement considered in characterizations
 of wait-free task computability~\cite{BG97,HS99}, inputs were vertices
 of $\s$ and $\C$ was a chromatic subdivision of $\s$.
-
+%
 Affine tasks can be seen as a generalization of simplex agreement
 tasks considered in~\cite{BG97,HS99}, where the output 
 complex is no longer a subdivision but a subset of some 
 iteration of the standard chromatic subdivision.
+
 Formally, let $L$ be a pure subcomplex of $\Chr^l\s$ for some~$l\in \mathbb{N}$.
 The affine task associated to $L$ is then defined as $(\s,L,\Delta)$, 
 where, for every face 
@@ -887,151 +829,15 @@ notations, we use $L$ to denote the affine task
 associated to $L$. 
 By running~$m$ iterations of this task, we obtain $L^m$, a 
 subcomplex of $\Chr^{lm}\s$, corresponding to a subset of 
-$\IS^{~lm}$ runs (each iteration includes $l$ IS rounds). We 
+$\IS^{~lm}$ runs (each of the $m$ iterations includes $l$ IS rounds). We 
 denote by $L^*$ the set of infinite runs of the IIS model where 
 every prefix restricted to a multiple of $l$ IS rounds 
 belongs to the subset of $\IS^{~lm}$ runs associated to $L^m$.
 
-\remove{
-\myparagraph{BGG-simulation.}
-%
-We employ a the \emph{BGG-simulation} simulation
-technique~\cite{KR17} that
-assembles algorithmic ideas presented in~\cite{BG93a,Gaf09-EBG,GG09,GG11-univ}. 
-%Let us now recall the main simulation
-%tool that is used in this paper, that will call the BGG-simulation
-%according to the name of the three main investigators of this
-%technique, namely Elizabeth Borowski, Eli Gafni and Rachid
-%Guerraoui.
-The technique allows a system of $n$ processes that communicate via
-read-write shared memory and $k$-set-consensus objects to
-\emph{simulate} a $k$-process system running an arbitrary read-write
-algorithm.
-%
-In particular, we can use this technique to run an extended BG-simulation~\cite{Gaf09-EBG} on top
-of these $k$ simulated processes, which gives a simulation of an
-arbitrary $k$-concurrent algorithm.
-An important feature of the simulation is that it adapts to the
-number of currently active simulated processes $a$: if it goes below
-$k$ (after some simulated processes complete their computations), the
-number of used simulators also becomes $a$.    
-We refer to~\cite{GHKR16} for a detailed description of this
-simulation algorithm.
-}
-\remove{
-
-\myparagraph{Defining models via agreement functions.}
-%
-\begin{definition}{[Agreement function]}
-The \emph{agreement function} of an (adversarial) model $\A$ is 
-a function $\alpha: 2^{\Pi} \to \{0,\ldots,n\}$, such that 
-for each $P\in 2^{\Pi}$, in the set of runs of $\A$ in which no process
-in $\Pi\setminus P$ participates,
-$\alpha(P)$-set consensus can be solved, 
-but $(\alpha(P)-1)$-set consensus cannot.
-%
-%%By convention, if $M$ contains no (infinite) runs with participating set
-%%$P$, then  $\alpha(P)=0$.
-%, e.g., there is no run in
-%$M$ with participating set $P$.
-\end{definition}
-
-\begin{definition}{[Solving a task $\alpha(P)$-active-resiliently]}
-Let $\alpha: 2^{\Pi} \to \{0,\ldots,n\}$ be the agreement function of a
-model $\A$.
-Let $P$ be any subset of $\Pi$. 
-An algorithm \emph{solves a task $T=(\I,\O,\Delta)$ in $\alpha(P)$-active-resiliently} if,
-assuming that $P$ is the participating set, it ensures that (1) in every run in which
-processes start with an input vector $I\in\I$, 
-all decided values form a vector $O\in\O$ such that $(I,O)\in\Delta$,
- and (2) if the run is $(\alpha(P)-1)$-active-resilient, i.e., at most
- $\alpha(P)-1$ participating processes are faulty. 
-\end{definition}
-
-We are going to use the following result concerning 
-}
-
-%======================
-%\section{Defining models through agreement functions}
-
-%\trnote{Previous version way too long for here, a section is probably too much also. Last, it may be convenient to make noticed that agreement function extended to the number of ``active'' processes, i.e., the number of processes participating to a particular agreement operation trivially capture collection of set-consensus objects...}
-
-\remove{
-\label{sec:agr}
-%======================
-
-%\myparagraph{Models.}
-%
-Generally, a \emph{model} is a set of runs. 
-In the AS case, we assume that a model allows every process to
-participate, i.e., for each $P\in2^{\Pi}$, the model includes a run in
-which $P$ is the participating set. 
-
-Consider a function $\alpha: 2^{\Pi} \to \{0,\ldots,n\}$. 
-We say that $\alpha$ is an agreement function of if each set of participating processes
-$P\in 2^{\Pi}$ can solve $\alpha(P)$-set agreement but cannot solve
-$(\alpha(P)-1)$-set agreement in this model.  
-By convention, $\alpha(P)=0$ implies that if $P$ is the participating
-set, then no process is obliged to decide.
-
-We say that $\alpha$ is \emph{monotonic} if for all $P$ and $P'$ in $2^{\Pi}$,
-$P\subseteq P'$ implies $\alpha(P)\leq\alpha(P')$. 
-
-
-
-\remove{
-\myparagraph{Active resilience.}  
-If in a given run, at most $k\in\Nat_n$ participating
-processes are faulty and at least one participating process is
-correct, we say that the run is \emph{$k$-active-resilient}.   
-The model of  \emph{$k$-active resilience} consists of all
-$k$-active-resilient runs. 
-
-It has been shown in~\cite{GG11-univ} that the model of $k$-active
-resilience is able to solve exactly the same set of tasks as the the
-model in which, in addition to atomic snapshots, processes are allowed
-to access $(k+1)$-set agreement objects, or the model of
-$k$-concurrency in which at most $k$ processes can be concurrently
-\emph{active}, i.e., after they take the first step and before they
-produce outputs. 
-
-\begin{lemma}%~\cite{GG11-univ}
-\label{lem:kconc}
-The agreement function of the model of $k$-active-resilience is
-$\alpha_{k,\textit{conc}}(P)= \min(|P|,k+1)$.
-\end{lemma}    
-}
-
-\myparagraph{Solving a task in a model.}
-%
-Consider a function $\alpha: 2^{\Pi} \to \{0,\ldots,n\}$.  
-An algorithm \emph{solves a task $T=(\I,\O,\Delta)$ in an
-  $\alpha$-model} if it ensures that (1) in every run in which
-processes start with an input vector $I\in\I$, 
-all decided values form a vector $O\in\O$ such that $(I,O)\in\Delta$,
-and (2) if the run is $(\alpha(P)-1)$-active-resilient, where $P$ is
-the participating set, then every correct process decides. 
-
-The definition immediately captures task solvability in the model of $k$-active
-resilience. 
-To convince ourselves that the definition applies to superset-closed
-adversaries, we need the following lemma.
-(Recall that solving a task in an adversarial model $\A$ is to ensure that
-in every $\A$-compliant run, every correct process decides, and
-decisions match inputs with respect to the task specification~\cite{GK10,HR10,Kuz12}.) 
-
-\begin{lemma}%~\cite{GG11-univ}
-\label{lem:adv:task}
-A task can be solved in a superset-closed adversarial model $\A$ if and
-only if can be solved in the $\alpha_{\A}$-model.
-\end{lemma}    
-%
-(Check Appendix~\ref{app:agr} for proofs.)
-}
-
-
+%=====================================
 \section{Adversaries and agreement functions}
 \label{sec:adv}
+%=====================================
 
 An \emph{adversary} $\A$ is a set of subsets of $\Pi$, called \emph{live sets}, $\A\subseteq 2^{\Pi}$.
 %
@@ -1044,15 +850,16 @@ $\A$-compliant runs.
 
 %\begin{definition}[Agreement function]~\cite{KR17}
 %  \label{def:agr}
-The \emph{agreement function}~\cite{KR17} of an adversarial model $\A$ is 
-a function $\alpha_\A: 2^{\Pi} \to \{0,\ldots,n\}$, such that 
+Consider  an
+adversary $\A$ and a function $\alpha_{\A}: 2^{\Pi} \to \{0,\ldots,n\}$. 
+We say that $\alpha$ is an \emph{agreement function} of $\A$-model if
 for each $P\in 2^{\Pi}$, in the set of runs of $\A$ in which no process
 in $\Pi\setminus P$ participates,
-$\alpha_\A(P)$-set consensus can be solved, 
-but $(\alpha_\A(P)-1)$-set consensus cannot.
-Note that by convention, if $\Pi\setminus P$ is not a
-valid participating set, as it does not include a live set,
-$\alpha_\A(P)$ is set to be equal to $0$.
+$\alpha_{\A}(P)$-set consensus can be solved,  but $(\alpha_{\A}(P)-1)$-set consensus cannot.
+Intuitively, $\alpha_A(P)$ is the best level of set consensus that
+can be reached when only processes in $P$ are allowed participate.
+By convention, if $P$ does not contain a live set, we set $\alpha_\A(P)=0$.
+
 An \emph{$\alpha$-adaptive set consensus} is 
 an abstraction solving a set consensus protocol  
 such that at the time $k$ distinct output values are returned
@@ -1173,7 +980,6 @@ with $P$ the participation at the earliest time a process decided;
 (\emph{Validity}) Each decided value has been proposed by some process.
 \end{theorem}
 }
-
 
 %===================================
 \section{Defining the affine task for an $\alpha$-model}
